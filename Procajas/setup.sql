@@ -10,7 +10,7 @@ GO
 ;
 
 -- ALMACEN
-CREATE TABLE Procajas.dbo.Warehouse
+CREATE TABLE dbo.Warehouse
 (
 	vc_material varchar(50) not null,
 	vc_department varchar(3) not null,
@@ -19,129 +19,123 @@ CREATE TABLE Procajas.dbo.Warehouse
 	vc_invoice varchar(50) null,
 	vc_location varchar(10) null
 );
+GO
 
-CREATE NONCLUSTERED INDEX [ix_WarehouseMaterial] ON Procajas.dbo.Warehouse
+CREATE NONCLUSTERED INDEX [ix_WarehouseMaterial] ON dbo.Warehouse
 (
 	vc_material ASC
 ) ON [PRIMARY]
 GO
 
-CREATE NONCLUSTERED INDEX [ix_WarehouseDepartment] ON Procajas.dbo.Warehouse
+CREATE NONCLUSTERED INDEX [ix_WarehouseDepartment] ON dbo.Warehouse
 (
 	vc_department ASC
 ) ON [PRIMARY]
 GO
 
-CREATE NONCLUSTERED INDEX [ix_WarehouseDate] ON Procajas.dbo.Warehouse
+CREATE NONCLUSTERED INDEX [ix_WarehouseDate] ON dbo.Warehouse
 (
 	dt_date ASC
 ) ON [PRIMARY]
 GO
 
-CREATE NONCLUSTERED INDEX [ix_WarehouseInvoice] ON Procajas.dbo.Warehouse
+CREATE NONCLUSTERED INDEX [ix_WarehouseInvoice] ON dbo.Warehouse
 (
 	vc_invoice ASC
 ) ON [PRIMARY]
 GO
 
 -- PROCESO
-CREATE TABLE Procajas.dbo.Process
+CREATE TABLE dbo.Process
 (
-	Material varchar(50) not null,
-	Departamento varchar(3) not null,
-	Ubicacion varchar(10) not null,
-	Fecha datetime not null,
-	Detalles varchar(max) null
+	vc_material varchar(50) not null,
+	vc_department varchar(3) not null,
+	vc_location varchar(10) not null,
+	dt_date datetime not null,
+	vc_details varchar(max) null
 );
+GO
 
-CREATE NONCLUSTERED INDEX [ix_ProcesoMaterial] ON Procajas.dbo.Proceso
+CREATE NONCLUSTERED INDEX [ix_ProcessMaterial] ON dbo.Process
 (
-	[Material] ASC
+	vc_material ASC
 ) ON [PRIMARY]
 GO
 
-CREATE NONCLUSTERED INDEX [ix_ProcesoDepartamento] ON Procajas.dbo.Proceso
+CREATE NONCLUSTERED INDEX [ix_ProcessDepartment] ON dbo.Process
 (
-	[Departamento] ASC
+	vc_department ASC
 ) ON [PRIMARY]
 GO
 
-CREATE NONCLUSTERED INDEX [ix_ProcesoFecha] ON Procajas.dbo.Proceso
+CREATE NONCLUSTERED INDEX [ix_ProcessDate] ON dbo.Process
 (
-	[Fecha] ASC
+	dt_date ASC
 ) ON [PRIMARY]
 GO
 
 
 -- PRODUCTOTERMINADO
-CREATE TABLE Procajas.dbo.ProductoTerminado
+CREATE TABLE dbo.ProductoTerminado
 (
-	Material varchar(50) not null,
-	Cantidad int not null,
-	Fecha datetime not null,
-	Factura varchar(50) null,
-	Ubicacion varchar(10) null
+	vc_material varchar(50) not null,
+	i_count int not null,
+	dt_date datetime not null,
+	vc_invoice varchar(50) null,
+	vc_location varchar(10) null
 );
+GO
 
-CREATE NONCLUSTERED INDEX [ix_ProductoTerminadoMaterial] ON Procajas.dbo.ProductoTerminado
+CREATE NONCLUSTERED INDEX [ix_ProductoTerminadoMaterial] ON dbo.ProductoTerminado
 (
-	[Material] ASC
+	vc_material ASC
 ) ON [PRIMARY]
 GO
 
-CREATE NONCLUSTERED INDEX [ix_ProductoTerminadoFecha] ON Procajas.dbo.ProductoTerminado
+CREATE NONCLUSTERED INDEX [ix_ProductoTerminadoDate] ON dbo.ProductoTerminado
 (
-	[Fecha] ASC
+	dt_date ASC
 ) ON [PRIMARY]
 GO
 
-CREATE NONCLUSTERED INDEX [ix_ProductoTerminadoFactura] ON Procajas.dbo.ProductoTerminado
+CREATE NONCLUSTERED INDEX [ix_ProductoTerminadoInvoice] ON dbo.ProductoTerminado
 (
-	[Factura] ASC
+	vc_invoice ASC
 ) ON [PRIMARY]
 GO
 
 
 -- DISCREPANCIAS
-CREATE TABLE Procajas.dbo.Discrepancias
+CREATE TABLE dbo.Discrepancies
 (
-	Material varchar(50) not null,
-	Departamento varchar(3) not null,
-	Cantidad int not null,
-	Fecha datetime not null,
-	Trabajo varchar(50) not null
+	vc_material varchar(50) not null,
+	vc_department varchar(3) not null,
+	i_count int not null,
+	dt_date datetime not null,
+	vc_job varchar(50) not null
 );
+GO
 
-CREATE NONCLUSTERED INDEX [ix_DiscrepanciasMaterial] ON Procajas.dbo.Discrepancias
+CREATE NONCLUSTERED INDEX [ix_DiscrepanciesMaterial] ON dbo.Discrepancies
 (
-	[Material] ASC
+	vc_material ASC
 ) ON [PRIMARY]
 GO
 
-CREATE NONCLUSTERED INDEX [ix_DiscrepanciasDepartamento] ON Procajas.dbo.Discrepancias
+CREATE NONCLUSTERED INDEX [ix_DiscrepanciesDepartment] ON dbo.Discrepancies
 (
-	[Departamento] ASC
+	vc_department ASC
 ) ON [PRIMARY]
 GO
 
-CREATE NONCLUSTERED INDEX [ix_DiscrepanciasTrabajo] ON Procajas.dbo.Discrepancias
+CREATE NONCLUSTERED INDEX [ix_DiscrepanciesJob] ON dbo.Discrepancies
 (
-	[Trabajo] ASC
+	vc_job ASC
 ) ON [PRIMARY]
 GO
 
-CREATE NONCLUSTERED INDEX [ix_DiscrepanciasFecha] ON Procajas.dbo.Discrepancias
+CREATE NONCLUSTERED INDEX [ix_DiscrepanciesDate] ON dbo.Discrepancies
 (
-	[Fecha] ASC
+	dt_date ASC
 ) ON [PRIMARY]
 GO
-
-CREATE NONCLUSTERED INDEX [ix_DiscrepanciasFactura] ON Procajas.dbo.Discrepancias
-(
-	[Factura] ASC
-) ON [PRIMARY]
-GO
-
-
-finish:
-;

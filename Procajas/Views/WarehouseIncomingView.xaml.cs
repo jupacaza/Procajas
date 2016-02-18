@@ -1,5 +1,4 @@
-﻿using Procajas.ProcajasDataSetTableAdapters;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,11 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Procajas
+namespace Procajas.Views
 {
-    public partial class MainWindow : Window
+    /// <summary>
+    /// Interaction logic for ProcessSelectionView.xaml
+    /// </summary>
+    public partial class WarehouseIncomingView : UserControl
     {
-        public MainWindow()
+        public WarehouseIncomingView()
         {
             InitializeComponent();
         }

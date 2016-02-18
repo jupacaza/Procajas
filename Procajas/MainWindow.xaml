@@ -1,13 +1,21 @@
 ﻿<Window x:Class="Procajas.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Procajas"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:views="clr-namespace:Procajas.Views"
+        Title="Procajas" Height="350" Width="525">
     <Grid>
-        <StackPanel>
-        </StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Margin="5" FontSize="32" TextWrapping="Wrap">Procajas</TextBlock>
+
+        <TabControl AutomationProperties.AutomationId="InteractivityTabControl" Grid.Row="1">
+            <TabItem x:Uid="WarehouseIncomingTabItem" Header="Entrada a Almacen">
+                <views:WarehouseIncomingView />
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
