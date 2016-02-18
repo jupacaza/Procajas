@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SistemaComercializadora
+namespace Procajas
 {
     public partial class MainWindow : Window
     {

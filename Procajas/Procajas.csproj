@@ -7,8 +7,8 @@
     <ProjectGuid>{3A14FF86-772B-40E2-A4CF-38F0AC7519C5}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SistemaComercializadora</RootNamespace>
-    <AssemblyName>SistemaComercializadora</AssemblyName>
+    <RootNamespace>Procajas</RootNamespace>
+    <AssemblyName>Procajas</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -112,6 +112,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Models\" />
     <Folder Include="Repository\Models\" />
   </ItemGroup>
   <ItemGroup>

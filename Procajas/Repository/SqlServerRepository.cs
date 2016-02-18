@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SistemaComercializadora.Repository
+namespace Procajas.Repository
 {
     public class SqlServerRepository : IRepository
     {
