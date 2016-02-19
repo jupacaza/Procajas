@@ -1,0 +1,71 @@
+﻿<UserControl x:Class="Procajas.Views.ProcessCheckinView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:p="clr-namespace:Procajas.Properties"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:prism="http://prismlibrary.com/" 
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             xmlns:views="clr-namespace:Procajas.Views">
+    <ScrollViewer>
+        <StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock HorizontalAlignment="Left" Margin="5" TextWrapping="Wrap" Text="{x:Static p:Resources.originText}" VerticalAlignment="Top"/>
+                <TextBlock HorizontalAlignment="Left" Margin="5" TextWrapping="Wrap" Text="{x:Static p:Resources.warehouseText}" VerticalAlignment="Top"/>
+            </StackPanel>
+            
+            <TextBlock HorizontalAlignment="Left" Margin="5" TextWrapping="Wrap" Text="{x:Static p:Resources.processText}" VerticalAlignment="Top"/>
+            <ComboBox HorizontalAlignment="Left" Width="200" 
+                      ItemsSource="{Binding ProcessList}"
+                      SelectedValue="{Binding SelectedProcess, Mode=TwoWay}"/>
+
+            <TextBlock HorizontalAlignment="Left" Margin="5" TextWrapping="Wrap" Text="{x:Static p:Resources.materialText}" VerticalAlignment="Top"/>
+            <TextBox HorizontalAlignment="Left" Height="23" Width="200" Margin="5" TextWrapping="Wrap" VerticalAlignment="Top" />
+
+            <TextBlock HorizontalAlignment="Left" Margin="5" TextWrapping="Wrap" Text="{x:Static p:Resources.dateText}" VerticalAlignment="Top"/>
+            <DatePicker HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top"/>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="73"/>
+                    <ColumnDefinition Width="73"/>
+                    <ColumnDefinition Width="73"/>
+                    <ColumnDefinition Width="73"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Column="0" Grid.Row="0" Text="{x:Static p:Resources.selectionText}" Margin="5,0,0,0"/>
+                <TextBlock Grid.Column="1" Grid.Row="0" Text="{x:Static p:Resources.locationText}"  />
+                <TextBlock Grid.Column="2" Grid.Row="0" Text="{x:Static p:Resources.existingText}"  />
+                <TextBlock Grid.Column="3" Grid.Row="0" Text="{x:Static p:Resources.toUseText}"     Margin="0,0,0,5"/>
+                
+                <ListView Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="4" ItemsSource="{Binding QuantitiesPerLocation, Mode=TwoWay}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="70"/>
+                                    <ColumnDefinition Width="70"/>
+                                    <ColumnDefinition Width="70"/>
+                                    <ColumnDefinition Width="70"/>
+                                </Grid.ColumnDefinitions>
+
+                                <CheckBox Grid.Column="0" IsChecked="{Binding Selected, Mode=TwoWay}"/>
+                                <TextBlock Grid.Column="1" Text="{Binding Location, Mode=OneWay}"/>
+                                <TextBlock Grid.Column="2" Text="{Binding ExistingQuantity, Mode=OneWay}"/>
+                                <TextBox Grid.Column="3" Text="{Binding QuantityToUse, Mode=TwoWay}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+
+            <TextBlock HorizontalAlignment="Left" Margin="5" TextWrapping="Wrap" Text="{x:Static p:Resources.destinyLocationText}" VerticalAlignment="Top"/>
+            <TextBox HorizontalAlignment="Left" Height="23" Width="200" Margin="5" TextWrapping="Wrap" VerticalAlignment="Top" />
+
+            <Button Content="{x:Static p:Resources.acceptText}" Command="{Binding AcceptButtonCommand}" Height="23" Width="50" Margin="5" />
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

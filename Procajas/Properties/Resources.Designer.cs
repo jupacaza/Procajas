@@ -61,56 +61,182 @@ namespace Procajas.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Accept.
+        ///   Looks up a localized string similar to Aceptar.
         /// </summary>
-        public static string acceptButton_Content {
+        public static string acceptText {
             get {
-                return ResourceManager.GetString("acceptButton.Content", resourceCulture);
+                return ResourceManager.GetString("acceptText", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Date:.
+        ///   Looks up a localized string similar to Cancelar.
         /// </summary>
-        public static string dateTextBlock_Text {
+        public static string cancelText {
             get {
-                return ResourceManager.GetString("dateTextBlock.Text", resourceCulture);
+                return ResourceManager.GetString("cancelText", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invoice:.
+        ///   Looks up a localized string similar to Fecha.
         /// </summary>
-        public static string invoiceTextBlock_Text {
+        public static string dateText {
             get {
-                return ResourceManager.GetString("invoiceTextBlock.Text", resourceCulture);
+                return ResourceManager.GetString("dateText", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Location:.
+        ///   Looks up a localized string similar to Ubicación destino.
         /// </summary>
-        public static string locationTextBlock_Text {
+        public static string destinyLocationText {
             get {
-                return ResourceManager.GetString("locationTextBlock.Text", resourceCulture);
+                return ResourceManager.GetString("destinyLocationText", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Material:.
+        ///   Looks up a localized string similar to Existentes.
         /// </summary>
-        public static string materialTextBlock_Text {
+        public static string existingText {
             get {
-                return ResourceManager.GetString("materialTextBlock.Text", resourceCulture);
+                return ResourceManager.GetString("existingText", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Quantity:.
+        ///   Looks up a localized string similar to Entrada.
         /// </summary>
-        public static string quantityTextBlock_Text {
+        public static string inputText {
             get {
-                return ResourceManager.GetString("quantityTextBlock.Text", resourceCulture);
+                return ResourceManager.GetString("inputText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Entrada a Almacén.
+        /// </summary>
+        public static string inputToWarehouseText {
+            get {
+                return ResourceManager.GetString("inputToWarehouseText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Factura.
+        /// </summary>
+        public static string invoiceText {
+            get {
+                return ResourceManager.GetString("invoiceText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ubicación.
+        /// </summary>
+        public static string locationText {
+            get {
+                return ResourceManager.GetString("locationText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Material.
+        /// </summary>
+        public static string materialText {
+            get {
+                return ResourceManager.GetString("materialText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Origen.
+        /// </summary>
+        public static string originText {
+            get {
+                return ResourceManager.GetString("originText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Salida de Almacén.
+        /// </summary>
+        public static string outputFromWarehouseText {
+            get {
+                return ResourceManager.GetString("outputFromWarehouseText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Salida.
+        /// </summary>
+        public static string outputText {
+            get {
+                return ResourceManager.GetString("outputText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Entrada de proceso.
+        /// </summary>
+        public static string processCheckinText {
+            get {
+                return ResourceManager.GetString("processCheckinText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Salida de proceso.
+        /// </summary>
+        public static string processCheckoutText {
+            get {
+                return ResourceManager.GetString("processCheckoutText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Proceso.
+        /// </summary>
+        public static string processText {
+            get {
+                return ResourceManager.GetString("processText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cantidad.
+        /// </summary>
+        public static string quantityText {
+            get {
+                return ResourceManager.GetString("quantityText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Selección.
+        /// </summary>
+        public static string selectionText {
+            get {
+                return ResourceManager.GetString("selectionText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A usar.
+        /// </summary>
+        public static string toUseText {
+            get {
+                return ResourceManager.GetString("toUseText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Almacén.
+        /// </summary>
+        public static string warehouseText {
+            get {
+                return ResourceManager.GetString("warehouseText", resourceCulture);
             }
         }
     }

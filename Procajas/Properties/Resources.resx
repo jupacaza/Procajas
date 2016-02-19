@@ -117,22 +117,64 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="acceptButton.Content" xml:space="preserve">
-    <value>Accept</value>
+  <data name="acceptText" xml:space="preserve">
+    <value>Aceptar</value>
   </data>
-  <data name="dateTextBlock.Text" xml:space="preserve">
-    <value>Date:</value>
+  <data name="cancelText" xml:space="preserve">
+    <value>Cancelar</value>
   </data>
-  <data name="invoiceTextBlock.Text" xml:space="preserve">
-    <value>Invoice:</value>
+  <data name="dateText" xml:space="preserve">
+    <value>Fecha</value>
   </data>
-  <data name="locationTextBlock.Text" xml:space="preserve">
-    <value>Location:</value>
+  <data name="destinyLocationText" xml:space="preserve">
+    <value>Ubicación destino</value>
   </data>
-  <data name="materialTextBlock.Text" xml:space="preserve">
-    <value>Material:</value>
+  <data name="existingText" xml:space="preserve">
+    <value>Existentes</value>
   </data>
-  <data name="quantityTextBlock.Text" xml:space="preserve">
-    <value>Quantity:</value>
+  <data name="inputText" xml:space="preserve">
+    <value>Entrada</value>
+  </data>
+  <data name="inputToWarehouseText" xml:space="preserve">
+    <value>Entrada a Almacén</value>
+  </data>
+  <data name="invoiceText" xml:space="preserve">
+    <value>Factura</value>
+  </data>
+  <data name="locationText" xml:space="preserve">
+    <value>Ubicación</value>
+  </data>
+  <data name="materialText" xml:space="preserve">
+    <value>Material</value>
+  </data>
+  <data name="originText" xml:space="preserve">
+    <value>Origen</value>
+  </data>
+  <data name="outputFromWarehouseText" xml:space="preserve">
+    <value>Salida de Almacén</value>
+  </data>
+  <data name="outputText" xml:space="preserve">
+    <value>Salida</value>
+  </data>
+  <data name="processCheckinText" xml:space="preserve">
+    <value>Entrada de proceso</value>
+  </data>
+  <data name="processCheckoutText" xml:space="preserve">
+    <value>Salida de proceso</value>
+  </data>
+  <data name="processText" xml:space="preserve">
+    <value>Proceso</value>
+  </data>
+  <data name="quantityText" xml:space="preserve">
+    <value>Cantidad</value>
+  </data>
+  <data name="selectionText" xml:space="preserve">
+    <value>Selección</value>
+  </data>
+  <data name="toUseText" xml:space="preserve">
+    <value>A usar</value>
+  </data>
+  <data name="warehouseText" xml:space="preserve">
+    <value>Almacén</value>
   </data>
 </root>

@@ -118,21 +118,21 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="acceptButton.Content" xml:space="preserve">
-    <value>Aceptar</value>
+    <value>Accept</value>
   </data>
   <data name="dateTextBlock.Text" xml:space="preserve">
-    <value>Fecha:</value>
+    <value>Date:</value>
   </data>
   <data name="invoiceTextBlock.Text" xml:space="preserve">
-    <value>Factura:</value>
+    <value>Invoice:</value>
   </data>
   <data name="locationTextBlock.Text" xml:space="preserve">
-    <value>Ubicación:</value>
+    <value>Location:</value>
   </data>
   <data name="materialTextBlock.Text" xml:space="preserve">
     <value>Material:</value>
   </data>
   <data name="quantityTextBlock.Text" xml:space="preserve">
-    <value>Cantidad:</value>
+    <value>Quantity:</value>
   </data>
 </root>
