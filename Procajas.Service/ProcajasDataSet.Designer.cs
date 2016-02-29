@@ -10,7 +10,7 @@
 
 #pragma warning disable 1591
 
-namespace Procajas {
+namespace Procajas.Service {
     
     
     /// <summary>
@@ -2146,7 +2146,7 @@ namespace Procajas {
         }
     }
 }
-namespace Procajas.ProcajasDataSetTableAdapters {
+namespace Procajas.Service.ProcajasDataSetTableAdapters {
     
     
     /// <summary>
@@ -2293,7 +2293,7 @@ namespace Procajas.ProcajasDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::Procajas.Properties.Settings.Default.ProcajasConnectionString;
+            this._connection.ConnectionString = global::Procajas.Service.Properties.Settings.Default.ProcajasConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2546,7 +2546,7 @@ namespace Procajas.ProcajasDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::Procajas.Properties.Settings.Default.ProcajasConnectionString;
+            this._connection.ConnectionString = global::Procajas.Service.Properties.Settings.Default.ProcajasConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2804,7 +2804,7 @@ namespace Procajas.ProcajasDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::Procajas.Properties.Settings.Default.ProcajasConnectionString;
+            this._connection.ConnectionString = global::Procajas.Service.Properties.Settings.Default.ProcajasConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3059,7 +3059,7 @@ namespace Procajas.ProcajasDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::Procajas.Properties.Settings.Default.ProcajasConnectionString;
+            this._connection.ConnectionString = global::Procajas.Service.Properties.Settings.Default.ProcajasConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

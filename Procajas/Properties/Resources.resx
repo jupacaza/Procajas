@@ -123,10 +123,13 @@
   <data name="cancelText" xml:space="preserve">
     <value>Cancelar</value>
   </data>
+  <data name="consumedText" xml:space="preserve">
+    <value>Consumidos</value>
+  </data>
   <data name="dateText" xml:space="preserve">
     <value>Fecha</value>
   </data>
-  <data name="destinyLocationText" xml:space="preserve">
+  <data name="destinationLocationText" xml:space="preserve">
     <value>Ubicación destino</value>
   </data>
   <data name="existingText" xml:space="preserve">
@@ -143,6 +146,12 @@
   </data>
   <data name="locationText" xml:space="preserve">
     <value>Ubicación</value>
+  </data>
+  <data name="materialOutputText" xml:space="preserve">
+    <value>Material de salida</value>
+  </data>
+  <data name="materialsInThisProcessText" xml:space="preserve">
+    <value>Materiales en este proceso</value>
   </data>
   <data name="materialText" xml:space="preserve">
     <value>Material</value>
@@ -168,6 +177,12 @@
   <data name="quantityText" xml:space="preserve">
     <value>Cantidad</value>
   </data>
+  <data name="returnedText" xml:space="preserve">
+    <value>Regresados</value>
+  </data>
+  <data name="scrappedText" xml:space="preserve">
+    <value>Desechados</value>
+  </data>
   <data name="selectionText" xml:space="preserve">
     <value>Selección</value>
   </data>
@@ -176,5 +191,14 @@
   </data>
   <data name="warehouseText" xml:space="preserve">
     <value>Almacén</value>
+  </data>
+  <data name="isValidText" xml:space="preserve">
+    <value>Es válido</value>
+  </data>
+  <data name="noText" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="yesText" xml:space="preserve">
+    <value>Si</value>
   </data>
 </root>

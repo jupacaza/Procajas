@@ -8,10 +8,10 @@
              xmlns:views="clr-namespace:Procajas.Views">
     <ScrollViewer>
         <StackPanel>
-            <StackPanel Orientation="Horizontal">
+            <!--<StackPanel Orientation="Horizontal">
                 <TextBlock HorizontalAlignment="Left" Margin="5" TextWrapping="Wrap" Text="{x:Static p:Resources.originText}" VerticalAlignment="Top"/>
                 <TextBlock HorizontalAlignment="Left" Margin="5" TextWrapping="Wrap" Text="{x:Static p:Resources.warehouseText}" VerticalAlignment="Top"/>
-            </StackPanel>
+            </StackPanel>-->
             
             <TextBlock HorizontalAlignment="Left" Margin="5" TextWrapping="Wrap" Text="{x:Static p:Resources.processText}" VerticalAlignment="Top"/>
             <ComboBox HorizontalAlignment="Left" Width="200" 
@@ -19,10 +19,12 @@
                       SelectedValue="{Binding SelectedProcess, Mode=TwoWay}"/>
 
             <TextBlock HorizontalAlignment="Left" Margin="5" TextWrapping="Wrap" Text="{x:Static p:Resources.materialText}" VerticalAlignment="Top"/>
-            <TextBox HorizontalAlignment="Left" Height="23" Width="200" Margin="5" TextWrapping="Wrap" VerticalAlignment="Top" />
+            <TextBox HorizontalAlignment="Left" Height="23" Width="200" Margin="5" TextWrapping="Wrap" VerticalAlignment="Top" 
+                     Text="{Binding Material, ValidatesOnExceptions=True, Mode=TwoWay}"/>
 
             <TextBlock HorizontalAlignment="Left" Margin="5" TextWrapping="Wrap" Text="{x:Static p:Resources.dateText}" VerticalAlignment="Top"/>
-            <DatePicker HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top"/>
+            <DatePicker HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top"
+                        SelectedDate="{Binding CheckinDate, ValidatesOnExceptions=True, Mode=TwoWay}"/>
 
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -62,8 +64,9 @@
                 </ListView>
             </Grid>
 
-            <TextBlock HorizontalAlignment="Left" Margin="5" TextWrapping="Wrap" Text="{x:Static p:Resources.destinyLocationText}" VerticalAlignment="Top"/>
-            <TextBox HorizontalAlignment="Left" Height="23" Width="200" Margin="5" TextWrapping="Wrap" VerticalAlignment="Top" />
+            <TextBlock HorizontalAlignment="Left" Margin="5" TextWrapping="Wrap" Text="{x:Static p:Resources.destinationLocationText}" VerticalAlignment="Top"/>
+            <TextBox HorizontalAlignment="Left" Height="23" Width="200" Margin="5" TextWrapping="Wrap" VerticalAlignment="Top" 
+                     Text="{Binding DestinationLocation, ValidatesOnExceptions=True, Mode=TwoWay}"/>
 
             <Button Content="{x:Static p:Resources.acceptText}" Command="{Binding AcceptButtonCommand}" Height="23" Width="50" Margin="5" />
         </StackPanel>

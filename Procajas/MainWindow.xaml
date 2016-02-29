@@ -4,7 +4,7 @@
         xmlns:p="clr-namespace:Procajas.Properties"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:views="clr-namespace:Procajas.Views"
-        Title="Procajas" Height="480" Width="640">
+        Title="Procajas" Height="520" Width="640">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -21,10 +21,10 @@
                 <views:ProcessCheckinView />
             </TabItem>
             <TabItem Header="{x:Static p:Resources.processCheckoutText}">
-                
+                <views:ProcessCheckoutView />
             </TabItem>
             <TabItem Header="{x:Static p:Resources.outputFromWarehouseText}">
-                
+                <views:WarehouseOutgoingView />
             </TabItem>
         </TabControl>
     </Grid>

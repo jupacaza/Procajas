@@ -71,17 +71,23 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\MaterialLocationQuantity.cs" />
-    <Compile Include="ProcajasDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ProcajasDataSet.xsd</DependentUpon>
-    </Compile>
+    <Compile Include="Models\ProcessCheckoutConsumedMaterial.cs" />
+    <Compile Include="Utilities.cs" />
     <Compile Include="ViewModels\ProcessCheckinViewModel.cs" />
+    <Compile Include="ViewModels\ProcessCheckoutViewModel.cs" />
+    <Compile Include="ViewModels\WarehouseIncomingViewModel.cs" />
+    <Compile Include="ViewModels\WarehouseOutgoingViewModel.cs" />
     <Compile Include="Views\ProcessCheckinView.xaml.cs">
       <DependentUpon>ProcessCheckinView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ProcessCheckoutView.xaml.cs">
+      <DependentUpon>ProcessCheckoutView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\WarehouseIncomingView.xaml.cs">
       <DependentUpon>WarehouseIncomingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WarehouseOutgoingView.xaml.cs">
+      <DependentUpon>WarehouseOutgoingView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -99,7 +105,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ProcessCheckoutView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\WarehouseIncomingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WarehouseOutgoingView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -113,40 +127,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
-    <None Include="ProcajasDataSet.xsc">
-      <DependentUpon>ProcajasDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="ProcajasDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>ProcajasDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="ProcajasDataSet.xss">
-      <DependentUpon>ProcajasDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <Content Include="setup.sql" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

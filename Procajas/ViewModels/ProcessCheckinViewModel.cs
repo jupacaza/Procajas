@@ -3,9 +3,6 @@ using Prism.Mvvm;
 using Procajas.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Procajas.ViewModels
@@ -15,7 +12,7 @@ namespace Procajas.ViewModels
         private string selectedProcess;
         private List<string> processList;
         private string material;
-        private DateTime checkinDate;
+        private DateTime checkinDate = DateTime.Now;
         private List<MaterialLocationQuantity> quantitiesPerLocation;
         private string destinationLocation;
         
@@ -35,10 +32,12 @@ namespace Procajas.ViewModels
                 new MaterialLocationQuantity { Location = "B2", ExistingQuantity = 2000 },
                 new MaterialLocationQuantity { Location = "C3", ExistingQuantity = 1000 }
             };
+            ////
 
             this.AcceptButtonCommand = new DelegateCommand(this.DoProcessCheckin);
         }
 
+        #region public properties
         public string SelectedProcess
         {
             get
@@ -103,12 +102,14 @@ namespace Procajas.ViewModels
                 this.SetProperty(ref this.destinationLocation, value);
             }
         }
+        #endregion
 
-        // commands
+        #region commands
         public ICommand AcceptButtonCommand { get; private set; }
         
         private void DoProcessCheckin()
         {
         }
+        #endregion
     }
 }

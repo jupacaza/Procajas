@@ -79,6 +79,15 @@ namespace Procajas.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Consumidos.
+        /// </summary>
+        public static string consumedText {
+            get {
+                return ResourceManager.GetString("consumedText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fecha.
         /// </summary>
         public static string dateText {
@@ -90,9 +99,9 @@ namespace Procajas.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Ubicación destino.
         /// </summary>
-        public static string destinyLocationText {
+        public static string destinationLocationText {
             get {
-                return ResourceManager.GetString("destinyLocationText", resourceCulture);
+                return ResourceManager.GetString("destinationLocationText", resourceCulture);
             }
         }
         
@@ -133,6 +142,15 @@ namespace Procajas.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Es válido.
+        /// </summary>
+        public static string isValidText {
+            get {
+                return ResourceManager.GetString("isValidText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ubicación.
         /// </summary>
         public static string locationText {
@@ -142,11 +160,38 @@ namespace Procajas.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Material de salida.
+        /// </summary>
+        public static string materialOutputText {
+            get {
+                return ResourceManager.GetString("materialOutputText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Materiales en este proceso.
+        /// </summary>
+        public static string materialsInThisProcessText {
+            get {
+                return ResourceManager.GetString("materialsInThisProcessText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Material.
         /// </summary>
         public static string materialText {
             get {
                 return ResourceManager.GetString("materialText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No.
+        /// </summary>
+        public static string noText {
+            get {
+                return ResourceManager.GetString("noText", resourceCulture);
             }
         }
         
@@ -214,6 +259,24 @@ namespace Procajas.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Regresados.
+        /// </summary>
+        public static string returnedText {
+            get {
+                return ResourceManager.GetString("returnedText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Desechados.
+        /// </summary>
+        public static string scrappedText {
+            get {
+                return ResourceManager.GetString("scrappedText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Selección.
         /// </summary>
         public static string selectionText {
@@ -237,6 +300,15 @@ namespace Procajas.Properties {
         public static string warehouseText {
             get {
                 return ResourceManager.GetString("warehouseText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Si.
+        /// </summary>
+        public static string yesText {
+            get {
+                return ResourceManager.GetString("yesText", resourceCulture);
             }
         }
     }
