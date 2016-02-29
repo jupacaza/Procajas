@@ -201,4 +201,10 @@
   <data name="yesText" xml:space="preserve">
     <value>Si</value>
   </data>
+  <data name="materialInputText" xml:space="preserve">
+    <value>Material de entrada</value>
+  </data>
+  <data name="materialToUseText" xml:space="preserve">
+    <value>Material a usar</value>
+  </data>
 </root>

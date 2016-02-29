@@ -6,37 +6,28 @@
              xmlns:prism="http://prismlibrary.com/" 
              prism:ViewModelLocator.AutoWireViewModel="True"
              xmlns:views="clr-namespace:Procajas.Views">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
-        
-        <StackPanel Grid.Column="0">
-            <TextBlock HorizontalAlignment="Left" Margin="5" TextWrapping="Wrap" Text="{x:Static p:Resources.materialText}" VerticalAlignment="Top"/>
-            <TextBox HorizontalAlignment="Left" Height="23" Width="200" Margin="5" TextWrapping="Wrap" VerticalAlignment="Top"
-                     Text="{Binding Material, ValidatesOnExceptions=True, Mode=TwoWay}"/>
+    <StackPanel>
+        <TextBlock HorizontalAlignment="Left" Margin="5" TextWrapping="Wrap" Text="{x:Static p:Resources.dateText}" VerticalAlignment="Top"/>
+        <DatePicker HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top"
+                    SelectedDate="{Binding CheckinDate, ValidatesOnExceptions=True, Mode=TwoWay}"/>
 
-            <TextBlock HorizontalAlignment="Left" Margin="5" TextWrapping="Wrap" Text="{x:Static p:Resources.quantityText}" VerticalAlignment="Top"/>
-            <TextBox HorizontalAlignment="Left" Height="23" Width="200" Margin="5" TextWrapping="Wrap" VerticalAlignment="Top"
-                     Text="{Binding Quantity, ValidatesOnExceptions=True, Mode=TwoWay}"/>
+        <TextBlock HorizontalAlignment="Left" Margin="5" TextWrapping="Wrap" Text="{x:Static p:Resources.invoiceText}" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Width="200" Margin="5" TextWrapping="Wrap" VerticalAlignment="Top"
+                    Text="{Binding InvoiceNumber, ValidatesOnExceptions=True, Mode=TwoWay}"/>
 
-            <TextBlock HorizontalAlignment="Left" Margin="5" TextWrapping="Wrap" VerticalAlignment="Top" Text="{x:Static p:Resources.locationText}"/>
-            <TextBox HorizontalAlignment="Left" Height="23" Width="200" Margin="5" TextWrapping="Wrap" VerticalAlignment="Top"
-                     Text="{Binding Location, ValidatesOnExceptions=True, Mode=TwoWay}"/>
-        </StackPanel>
-        
-        <StackPanel Grid.Column="1">
-            <TextBlock HorizontalAlignment="Left" Margin="5" TextWrapping="Wrap" Text="{x:Static p:Resources.dateText}" VerticalAlignment="Top"/>
-            <DatePicker HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top"
-                        SelectedDate="{Binding CheckinDate, ValidatesOnExceptions=True, Mode=TwoWay}"/>
+        <TextBlock HorizontalAlignment="Left" Margin="5" TextWrapping="Wrap" Text="{x:Static p:Resources.materialInputText}" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Width="200" Margin="5" TextWrapping="Wrap" VerticalAlignment="Top"
+                    Text="{Binding Material, ValidatesOnExceptions=True, Mode=TwoWay}"/>
 
-            <TextBlock HorizontalAlignment="Left" Margin="5" TextWrapping="Wrap" Text="{x:Static p:Resources.invoiceText}" VerticalAlignment="Top"/>
-            <TextBox HorizontalAlignment="Left" Height="23" Width="200" Margin="5" TextWrapping="Wrap" VerticalAlignment="Top"
-                     Text="{Binding InvoiceNumber, ValidatesOnExceptions=True, Mode=TwoWay}"/>
+        <TextBlock HorizontalAlignment="Left" Margin="5" TextWrapping="Wrap" Text="{x:Static p:Resources.quantityText}" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Width="200" Margin="5" TextWrapping="Wrap" VerticalAlignment="Top"
+                    Text="{Binding Quantity, ValidatesOnExceptions=True, Mode=TwoWay}"/>
 
-            <Button Content="{x:Static p:Resources.acceptText}" Height="23" Width="50" Margin="5"
-                    Command="{Binding AcceptButtonCommand}"/>
-        </StackPanel>
-    </Grid>
+        <TextBlock HorizontalAlignment="Left" Margin="5" TextWrapping="Wrap" VerticalAlignment="Top" Text="{x:Static p:Resources.locationText}"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Width="200" Margin="5" TextWrapping="Wrap" VerticalAlignment="Top"
+                    Text="{Binding Location, ValidatesOnExceptions=True, Mode=TwoWay}"/>        
+
+        <Button Content="{x:Static p:Resources.acceptText}" Height="23" Width="50" Margin="5"
+                Command="{Binding AcceptButtonCommand}"/>
+    </StackPanel>
 </UserControl>

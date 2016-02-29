@@ -160,6 +160,15 @@ namespace Procajas.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Material de entrada.
+        /// </summary>
+        public static string materialInputText {
+            get {
+                return ResourceManager.GetString("materialInputText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Material de salida.
         /// </summary>
         public static string materialOutputText {
@@ -183,6 +192,15 @@ namespace Procajas.Properties {
         public static string materialText {
             get {
                 return ResourceManager.GetString("materialText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Material a usar.
+        /// </summary>
+        public static string materialToUseText {
+            get {
+                return ResourceManager.GetString("materialToUseText", resourceCulture);
             }
         }
         

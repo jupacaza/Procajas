@@ -26,6 +26,9 @@ namespace Procajas.ViewModels
                 "XYZ"
             };
 
+            this.material = "IMP_PinkZapatilla2016";
+            this.selectedProcess = "SUA";
+
             this.quantitiesPerLocation = new List<MaterialLocationQuantity>
             {
                 new MaterialLocationQuantity { Location = "A1", ExistingQuantity = 3000 },

@@ -8,8 +8,12 @@
              xmlns:views="clr-namespace:Procajas.Views">
     <ScrollViewer>
         <StackPanel>
+            <TextBlock HorizontalAlignment="Left" Margin="5" TextWrapping="Wrap" Text="{x:Static p:Resources.dateText}" VerticalAlignment="Top"/>
+            <DatePicker HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top"
+                        SelectedDate="{Binding CheckoutDate, ValidatesOnExceptions=True, Mode=TwoWay}"/>
+            
             <TextBlock HorizontalAlignment="Left" Margin="5" TextWrapping="Wrap" Text="{x:Static p:Resources.processText}" VerticalAlignment="Top"/>
-            <ComboBox HorizontalAlignment="Left" Width="200" 
+            <ComboBox HorizontalAlignment="Left" Width="200" Margin="5"
                       ItemsSource="{Binding ProcessList}"
                       SelectedValue="{Binding SelectedProcess, Mode=TwoWay}"/>
 
@@ -17,12 +21,8 @@
             <TextBox HorizontalAlignment="Left" Height="23" Width="200" Margin="5" TextWrapping="Wrap" VerticalAlignment="Top" 
                      Text="{Binding Material, ValidatesOnExceptions=True, Mode=TwoWay}"/>
 
-            <TextBlock HorizontalAlignment="Left" Margin="5" TextWrapping="Wrap" Text="{x:Static p:Resources.dateText}" VerticalAlignment="Top"/>
-            <DatePicker HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top"
-                        SelectedDate="{Binding CheckoutDate, ValidatesOnExceptions=True, Mode=TwoWay}"/>
-
             <TextBlock HorizontalAlignment="Left" Margin="5" TextWrapping="Wrap" Text="{x:Static p:Resources.materialsInThisProcessText}" VerticalAlignment="Top"/>
-            <Grid Margin="7,0,0,0">
+            <Grid Margin="12,0,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="70"/>
                     <ColumnDefinition Width="70"/>
@@ -44,7 +44,7 @@
                 <TextBlock Grid.Column="5" Text="{x:Static p:Resources.returnedText}"  />
                 <TextBlock Grid.Column="6" Text="{x:Static p:Resources.isValidText}"   />                
             </Grid>
-            <ListView ItemsSource="{Binding ConsumedMaterials, Mode=TwoWay}" HorizontalAlignment="Left" >
+            <ListView ItemsSource="{Binding ConsumedMaterials, Mode=TwoWay}" HorizontalAlignment="Left" Margin="5">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid HorizontalAlignment="Left">
