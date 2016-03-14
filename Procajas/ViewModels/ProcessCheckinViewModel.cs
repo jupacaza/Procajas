@@ -136,7 +136,9 @@ namespace Procajas.ViewModels
                 // show a message box or something
             }
         }
+        #endregion
 
+        #region private methods
         private bool ValidateFields()
         {
             // TODO: Do validation
