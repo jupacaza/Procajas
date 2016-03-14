@@ -19,7 +19,7 @@
 
             <TextBlock HorizontalAlignment="Left" Margin="5" TextWrapping="Wrap" Text="{x:Static p:Resources.materialToUseText}" VerticalAlignment="Top"/>
             <TextBox HorizontalAlignment="Left" Height="23" Width="200" Margin="5" TextWrapping="Wrap" VerticalAlignment="Top" 
-                     Text="{Binding Material, ValidatesOnExceptions=True, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{Binding Material, ValidatesOnExceptions=True, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"/>
 
             <Grid Margin="12,0,0,0">
                 <Grid.ColumnDefinitions>
@@ -48,7 +48,7 @@
                             <CheckBox   Grid.Column="0" IsChecked="{Binding Selected, Mode=TwoWay}"/>
                             <TextBlock  Grid.Column="1" Text="{Binding Location, Mode=OneWay}"/>
                             <TextBlock  Grid.Column="2" Text="{Binding ExistingQuantity, Mode=OneWay}"/>
-                            <TextBox    Grid.Column="3" Text="{Binding QuantityToUse, Mode=TwoWay}"/>
+                            <TextBox    Grid.Column="3" Text="{Binding QuantityToUse, ValidatesOnExceptions=True, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"/>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>

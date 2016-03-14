@@ -10,15 +10,15 @@
         <StackPanel>
             <TextBlock HorizontalAlignment="Left" Margin="5" TextWrapping="Wrap" Text="{x:Static p:Resources.dateText}" VerticalAlignment="Top"/>
             <DatePicker HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top"
-                        SelectedDate="{Binding CheckoutDate, ValidatesOnExceptions=True, Mode=TwoWay}"/>
+                        SelectedDate="{Binding CheckoutDate, ValidatesOnExceptions=True, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"/>
 
             <TextBlock HorizontalAlignment="Left" Margin="5" TextWrapping="Wrap" Text="{x:Static p:Resources.materialOutputText}" VerticalAlignment="Top"/>
             <TextBox HorizontalAlignment="Left" Height="23" Width="200" Margin="5" TextWrapping="Wrap" VerticalAlignment="Top"
-                     Text="{Binding Material, ValidatesOnExceptions=True, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{Binding Material, ValidatesOnExceptions=True, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"/>
 
             <TextBlock HorizontalAlignment="Left" Margin="5" TextWrapping="Wrap" Text="{x:Static p:Resources.invoiceText}" VerticalAlignment="Top"/>
             <TextBox HorizontalAlignment="Left" Height="23" Width="200" Margin="5" TextWrapping="Wrap" VerticalAlignment="Top"
-                     Text="{Binding InvoiceNumber, ValidatesOnExceptions=True, Mode=TwoWay}"/>
+                     Text="{Binding InvoiceNumber, ValidatesOnExceptions=True, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"/>
 
             <Grid Margin="12,0,0,0">
                 <Grid.ColumnDefinitions>
@@ -52,6 +52,10 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+
+            <TextBlock HorizontalAlignment="Left" Margin="5" TextWrapping="Wrap" Text="{x:Static p:Resources.finishedProductLocationText}" VerticalAlignment="Top"/>
+            <TextBox HorizontalAlignment="Left" Height="23" Width="200" Margin="5" TextWrapping="Wrap" VerticalAlignment="Top"
+                     Text="{Binding FinishedProductLocation, ValidatesOnExceptions=True, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"/>
 
             <Button Content="{x:Static p:Resources.acceptText}" Command="{Binding AcceptButtonCommand}" Height="23" Width="50" Margin="5" />
         </StackPanel>

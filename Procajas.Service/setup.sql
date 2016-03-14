@@ -76,7 +76,7 @@ GO
 
 
 -- PRODUCTOTERMINADO
-CREATE TABLE dbo.ProductoTerminado
+CREATE TABLE dbo.FinishedProduct
 (
 	vc_material varchar(50) not null,
 	i_count int not null,
@@ -86,19 +86,19 @@ CREATE TABLE dbo.ProductoTerminado
 );
 GO
 
-CREATE NONCLUSTERED INDEX [ix_ProductoTerminadoMaterial] ON dbo.ProductoTerminado
+CREATE NONCLUSTERED INDEX [ix_FinishedProductMaterial] ON dbo.FinishedProduct
 (
 	vc_material ASC
 ) ON [PRIMARY]
 GO
 
-CREATE NONCLUSTERED INDEX [ix_ProductoTerminadoDate] ON dbo.ProductoTerminado
+CREATE NONCLUSTERED INDEX [ix_FinishedProductDate] ON dbo.FinishedProduct
 (
 	dt_date ASC
 ) ON [PRIMARY]
 GO
 
-CREATE NONCLUSTERED INDEX [ix_ProductoTerminadoInvoice] ON dbo.ProductoTerminado
+CREATE NONCLUSTERED INDEX [ix_FinishedProductInvoice] ON dbo.FinishedProduct
 (
 	vc_invoice ASC
 ) ON [PRIMARY]

@@ -11,8 +11,8 @@ namespace Procajas.Models
     {
         private bool selected;
         private string location;
-        private double existingQuantity;
-        private double quantityToUse;
+        private int existingQuantity;
+        private int quantityToUse;
 
         public bool Selected
         {
@@ -39,7 +39,7 @@ namespace Procajas.Models
             }
         }
 
-        public double ExistingQuantity
+        public int ExistingQuantity
         {
             get
             {
@@ -51,7 +51,7 @@ namespace Procajas.Models
             }
         }
 
-        public double QuantityToUse
+        public int QuantityToUse
         {
             get
             {
@@ -60,6 +60,10 @@ namespace Procajas.Models
             set
             {
                 this.SetProperty(ref quantityToUse, value);
+                if (value > this.existingQuantity)
+                {
+                    throw new ApplicationException("Quantity to use cannot be greater than existing quantity.");
+                }
             }
         }
     }

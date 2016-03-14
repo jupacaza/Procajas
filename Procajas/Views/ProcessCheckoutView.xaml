@@ -19,7 +19,7 @@
 
             <TextBlock HorizontalAlignment="Left" Margin="5" TextWrapping="Wrap" Text="{x:Static p:Resources.materialOutputText}" VerticalAlignment="Top"/>
             <TextBox HorizontalAlignment="Left" Height="23" Width="200" Margin="5" TextWrapping="Wrap" VerticalAlignment="Top" 
-                     Text="{Binding Material, ValidatesOnExceptions=True, Mode=TwoWay}"/>
+                     Text="{Binding Material, ValidatesOnExceptions=True, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"/>
 
             <TextBlock HorizontalAlignment="Left" Margin="5" TextWrapping="Wrap" Text="{x:Static p:Resources.materialsInThisProcessText}" VerticalAlignment="Top"/>
             <Grid Margin="12,0,0,0">
@@ -70,9 +70,13 @@
                 </ListView.ItemTemplate>
             </ListView>
 
+            <TextBlock HorizontalAlignment="Left" Margin="5" TextWrapping="Wrap" Text="{x:Static p:Resources.quantityCreatedText}" VerticalAlignment="Top"/>
+            <TextBox HorizontalAlignment="Left" Height="23" Width="200" Margin="5" TextWrapping="Wrap" VerticalAlignment="Top" 
+                     Text="{Binding QuantityCreated, ValidatesOnExceptions=True, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"/>
+            
             <TextBlock HorizontalAlignment="Left" Margin="5" TextWrapping="Wrap" Text="{x:Static p:Resources.destinationLocationText}" VerticalAlignment="Top"/>
             <TextBox HorizontalAlignment="Left" Height="23" Width="200" Margin="5" TextWrapping="Wrap" VerticalAlignment="Top" 
-                     Text="{Binding DestinationLocation, ValidatesOnExceptions=True, Mode=TwoWay}"/>
+                     Text="{Binding DestinationLocation, ValidatesOnExceptions=True, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"/>
 
             <Button Content="{x:Static p:Resources.acceptText}" Command="{Binding AcceptButtonCommand}" Height="23" Width="50" Margin="5" />
         </StackPanel>

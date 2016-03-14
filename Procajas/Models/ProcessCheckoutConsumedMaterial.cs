@@ -8,10 +8,10 @@ namespace Procajas.Models
     {
         private bool selected;
         private string material;
-        private double existing;
-        private double consumed;
-        private double scrapped;
-        private double returned;
+        private int existing;
+        private int consumed;
+        private int scrapped;
+        private int returned;
         private bool isValid = true;
 
         public bool Selected
@@ -45,7 +45,7 @@ namespace Procajas.Models
             }
         }
 
-        public double Existing
+        public int Existing
         {
             get
             {
@@ -66,8 +66,16 @@ namespace Procajas.Models
             }
             set
             {
-                this.SetProperty(ref this.consumed, this.ThrowIfNotPositiveDouble(value));
+                this.SetProperty(ref this.consumed, this.ThrowIfNotPositiveInt(value));
                 this.Validate();
+            }
+        }
+
+        public int ConsumedInt
+        {
+            get
+            {
+                return this.consumed;
             }
         }
 
@@ -79,8 +87,16 @@ namespace Procajas.Models
             }
             set
             {
-                this.SetProperty(ref this.scrapped, this.ThrowIfNotPositiveDouble(value));
+                this.SetProperty(ref this.scrapped, this.ThrowIfNotPositiveInt(value));
                 this.Validate();
+            }
+        }
+
+        public int ScrappedInt
+        {
+            get
+            {
+                return this.scrapped;
             }
         }
 
@@ -92,8 +108,24 @@ namespace Procajas.Models
             }
             set
             {
-                this.SetProperty(ref this.returned, this.ThrowIfNotPositiveDouble(value));
+                this.SetProperty(ref this.returned, this.ThrowIfNotPositiveInt(value));
                 this.Validate();
+            }
+        }
+
+        public int ReturnedInt
+        {
+            get
+            {
+                return this.returned;
+            }
+        }
+
+        public int TotalQuantity
+        {
+            get
+            {
+                return this.consumed + this.returned + this.scrapped;
             }
         }
 
@@ -126,15 +158,15 @@ namespace Procajas.Models
             return this.selected ? this.existing - this.consumed - this.scrapped - this.returned == 0 : true;
         }
 
-        private double ThrowIfNotPositiveDouble(string sValue)
+        private int ThrowIfNotPositiveInt(string sValue)
         {
-            double dValue;
-            if (!Utilities.ValidatePositiveDouble(sValue, out dValue))
+            int iValue;
+            if (!Utilities.ValidatePositiveInt(sValue, out iValue))
             {
-                throw new ApplicationException("Input has to be a valid numerical positive value");
+                throw new ApplicationException("Input has to be a valid integer positive value");
             }
 
-            return dValue;
+            return iValue;
         }
     }
 }

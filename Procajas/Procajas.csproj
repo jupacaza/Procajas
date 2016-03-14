@@ -70,8 +70,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Constants.cs" />
+    <Compile Include="Store\IProcajasStore.cs" />
     <Compile Include="Models\MaterialLocationQuantity.cs" />
+    <Compile Include="Store\ProcajasServiceStore.cs" />
     <Compile Include="Models\ProcessCheckoutConsumedMaterial.cs" />
+    <Compile Include="StoreFactory.cs" />
+    <Compile Include="Store\TestProcajasStore.cs" />
     <Compile Include="Utilities.cs" />
     <Compile Include="ViewModels\ProcessCheckinViewModel.cs" />
     <Compile Include="ViewModels\ProcessCheckoutViewModel.cs" />

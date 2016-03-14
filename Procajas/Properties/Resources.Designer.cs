@@ -115,6 +115,15 @@ namespace Procajas.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ubicación de producto terminado.
+        /// </summary>
+        public static string finishedProductLocationText {
+            get {
+                return ResourceManager.GetString("finishedProductLocationText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Entrada.
         /// </summary>
         public static string inputText {
@@ -174,6 +183,15 @@ namespace Procajas.Properties {
         public static string materialOutputText {
             get {
                 return ResourceManager.GetString("materialOutputText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Las primeras 3 letras del nombre del material deben ser las 3 letras del proceso en mayúscula..
+        /// </summary>
+        public static string materialProcessMismatchText {
+            get {
+                return ResourceManager.GetString("materialProcessMismatchText", resourceCulture);
             }
         }
         
@@ -264,6 +282,15 @@ namespace Procajas.Properties {
         public static string processText {
             get {
                 return ResourceManager.GetString("processText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cantidad producida.
+        /// </summary>
+        public static string quantityCreatedText {
+            get {
+                return ResourceManager.GetString("quantityCreatedText", resourceCulture);
             }
         }
         

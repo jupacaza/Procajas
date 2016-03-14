@@ -207,4 +207,13 @@
   <data name="materialToUseText" xml:space="preserve">
     <value>Material a usar</value>
   </data>
+  <data name="finishedProductLocationText" xml:space="preserve">
+    <value>Ubicación de producto terminado</value>
+  </data>
+  <data name="materialProcessMismatchText" xml:space="preserve">
+    <value>Las primeras 3 letras del nombre del material deben ser las 3 letras del proceso en mayúscula.</value>
+  </data>
+  <data name="quantityCreatedText" xml:space="preserve">
+    <value>Cantidad producida</value>
+  </data>
 </root>

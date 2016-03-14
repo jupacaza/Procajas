@@ -1,6 +1,7 @@
 ﻿using Prism.Commands;
 using Prism.Mvvm;
 using Procajas.Models;
+using Procajas.Store;
 using System;
 using System.Collections.Generic;
 using System.Windows.Input;
@@ -15,28 +16,13 @@ namespace Procajas.ViewModels
         private DateTime checkinDate = DateTime.Now;
         private List<MaterialLocationQuantity> quantitiesPerLocation;
         private string destinationLocation;
+
+        private IProcajasStore store;
         
         public ProcessCheckinViewModel()
         {
-            // TODO: load all non-static data from DB
-            this.processList = new List<string>
-            {
-                "IMP",
-                "SUA",
-                "XYZ"
-            };
-
-            this.material = "IMP_PinkZapatilla2016";
-            this.selectedProcess = "SUA";
-
-            this.quantitiesPerLocation = new List<MaterialLocationQuantity>
-            {
-                new MaterialLocationQuantity { Location = "A1", ExistingQuantity = 3000 },
-                new MaterialLocationQuantity { Location = "B2", ExistingQuantity = 2000 },
-                new MaterialLocationQuantity { Location = "C3", ExistingQuantity = 1000 }
-            };
-            ////
-
+            this.store = StoreFactory.Get(StoreTypes.Test);
+            this.processList = Constants.ProcessList;
             this.AcceptButtonCommand = new DelegateCommand(this.DoProcessCheckin);
         }
 
@@ -67,6 +53,7 @@ namespace Procajas.ViewModels
             set
             {
                 this.SetProperty(ref this.material, value);
+                this.LoadQuantitiesPerLocation();
             }
         }
 
@@ -110,8 +97,70 @@ namespace Procajas.ViewModels
         #region commands
         public ICommand AcceptButtonCommand { get; private set; }
         
-        private void DoProcessCheckin()
+        private async void DoProcessCheckin()
         {
+            if (this.ValidateFields())
+            {
+                // Checkout from warehouse table
+                List<CheckoutResource> checkoutResourceList = new List<CheckoutResource>();
+                foreach (MaterialLocationQuantity mlq in this.quantitiesPerLocation)
+                {
+                    if (mlq.Selected && mlq.QuantityToUse > 0)
+                    {
+                        CheckoutResource checkoutResource = new CheckoutResource()
+                        {
+                            Material = this.material,
+                            Location = mlq.Location,
+                            Quantity = mlq.QuantityToUse
+                        };
+
+                        checkoutResourceList.Add(checkoutResource);
+                    }
+                }
+
+                await store.CheckoutWarehouseResource(checkoutResourceList);
+
+                // Insert new record to process table
+                ProcessResource processResource = new ProcessResource()
+                {
+                    ProcessCheckinDate = this.checkinDate,
+                    Material = this.material,
+                    Department = this.selectedProcess,
+                    Location = this.destinationLocation
+                };
+
+                await store.InsertProcessResource(processResource);
+            }
+            else
+            {
+                // show a message box or something
+            }
+        }
+
+        private bool ValidateFields()
+        {
+            // TODO: Do validation
+
+            // Validate quantities
+            foreach (MaterialLocationQuantity mlq in this.quantitiesPerLocation)
+            {
+                if (mlq.Selected && mlq.QuantityToUse > mlq.ExistingQuantity)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        private async void LoadQuantitiesPerLocation()
+        {
+            QuantitiesPerLocationResource qplResource = new QuantitiesPerLocationResource()
+            {
+                Material = this.material
+            };
+
+            this.QuantitiesPerLocation = await this.store.GetQuantitiesPerLocation(qplResource);
         }
         #endregion
     }

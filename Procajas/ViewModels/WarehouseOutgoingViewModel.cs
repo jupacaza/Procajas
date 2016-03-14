@@ -1,8 +1,10 @@
 ﻿using Prism.Commands;
 using Prism.Mvvm;
 using Procajas.Models;
+using Procajas.Store;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Input;
 
 namespace Procajas.ViewModels
@@ -13,19 +15,14 @@ namespace Procajas.ViewModels
         private string invoiceNumber;
         private string material;
         private List<MaterialLocationQuantity> quantitiesPerLocation;
+        private string finishedProductLocation;
+
+        private IProcajasStore store;
 
         public WarehouseOutgoingViewModel()
         {
-            // TODO: load all non-static data from DB
-            this.material = "CAJ_PinkZapatilla";
-
-            this.quantitiesPerLocation = new List<MaterialLocationQuantity>
-            {
-                new MaterialLocationQuantity { Location = "A1", ExistingQuantity = 3000 },
-                new MaterialLocationQuantity { Location = "B2", ExistingQuantity = 2000 },
-                new MaterialLocationQuantity { Location = "C3", ExistingQuantity = 1000 }
-            };
-            ////
+            this.store = StoreFactory.Get(StoreTypes.Test);
+            
             this.AcceptButtonCommand = new DelegateCommand(this.DoWarehouseCheckout);
         }
 
@@ -63,6 +60,7 @@ namespace Procajas.ViewModels
             set
             {
                 this.SetProperty(ref this.material, value);
+                this.LoadQuantitiesPerLocation();
             }
         }
 
@@ -77,13 +75,75 @@ namespace Procajas.ViewModels
                 this.SetProperty(ref this.quantitiesPerLocation, value);
             }
         }
+
+        public string FinishedProductLocation
+        {
+            get
+            {
+                return this.finishedProductLocation;
+            }
+            set
+            {
+                this.SetProperty(ref this.finishedProductLocation, value);
+            }
+        }
         #endregion
 
         #region commands
         public ICommand AcceptButtonCommand { get; private set; }
 
-        private void DoWarehouseCheckout()
+        private async void DoWarehouseCheckout()
         {
+            if (this.ValidateFields())
+            {
+                List<CheckoutResource> checkoutResourceList = new List<CheckoutResource>();
+                int finalQuantity = 0;
+
+                foreach(MaterialLocationQuantity mlc in this.quantitiesPerLocation)
+                {
+                    if (mlc.Selected == true && mlc.QuantityToUse > 0)
+                    {
+                        CheckoutResource resource = new CheckoutResource()
+                        {
+                            Material = this.material,
+                            Quantity = mlc.QuantityToUse,
+                            Location = mlc.Location
+                        };
+
+                        finalQuantity += mlc.QuantityToUse;
+                        checkoutResourceList.Add(resource);
+                    }
+                }
+
+                await this.store.CheckoutWarehouseResource(checkoutResourceList);
+
+                FinishedProductResource finishedProductResource = new FinishedProductResource()
+                {
+                    Material = this.material,
+                    Quantity = finalQuantity,
+                    FinishDate = this.checkoutDate,
+                    InvoiceNumber = this.invoiceNumber,
+                    Location = this.finishedProductLocation
+                };
+
+                await this.store.InsertFinishedProduct(finishedProductResource);
+            }
+        }
+
+        private bool ValidateFields()
+        {
+            // TODO: Do validation
+            return true;
+        }
+
+        private async void LoadQuantitiesPerLocation()
+        {
+            QuantitiesPerLocationResource qplResource = new QuantitiesPerLocationResource()
+            {
+                Material = this.material
+            };
+
+            this.QuantitiesPerLocation = await this.store.GetQuantitiesPerLocation(qplResource);
         }
         #endregion
     }

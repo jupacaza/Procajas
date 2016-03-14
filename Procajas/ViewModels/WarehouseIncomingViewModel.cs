@@ -1,5 +1,7 @@
 ﻿using Prism.Commands;
 using Prism.Mvvm;
+using Procajas.Models;
+using Procajas.Store;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,14 +14,16 @@ namespace Procajas.ViewModels
     public class WarehouseIncomingViewModel : BindableBase
     {
         private string material;
-        private double quantity = 1;
+        private int quantity = 1;
         private string location;
         private DateTime checkinDate = DateTime.Now;
         private string invoiceNumber;
 
+        private IProcajasStore store;
+
         public WarehouseIncomingViewModel()
         {
-
+            this.store = StoreFactory.Get(StoreTypes.Test);
             this.AcceptButtonCommand = new DelegateCommand(this.DoWarehouseCheckin);
         }
 
@@ -44,13 +48,13 @@ namespace Procajas.ViewModels
             }
             set
             {
-                double dValue;
-                if(!Utilities.ValidatePositiveDouble(value, out dValue) || dValue <= 0)
+                int iValue;
+                if(!Utilities.ValidatePositiveInt(value, out iValue) || iValue <= 0)
                 {
                     throw new ApplicationException("Input has to be a valid numerical positive value");
                 }
 
-                this.SetProperty(ref this.quantity, dValue);
+                this.SetProperty(ref this.quantity, iValue);
             }
         }
 
@@ -94,8 +98,29 @@ namespace Procajas.ViewModels
         #region commands
         public ICommand AcceptButtonCommand { get; private set; }
 
-        private void DoWarehouseCheckin()
+        private async void DoWarehouseCheckin()
         {
+            if (this.ValidateFields())
+            {
+                // Insert new record to warehouse table
+                WarehouseResource warehouseResource = new WarehouseResource()
+                {
+                    Material = this.material,
+                    Department = Utilities.GetDepartmentFromMaterial(this.material),
+                    Quantity = this.quantity,
+                    DateOfInsertion = this.checkinDate,
+                    Location = this.location,
+                    InvoiceNumber = this.invoiceNumber
+                };
+
+                await this.store.InsertWarehouseResource(warehouseResource);
+            }
+        }
+
+        private bool ValidateFields()
+        {
+            // TODO: Validate
+            return true;
         }
         #endregion
     }
