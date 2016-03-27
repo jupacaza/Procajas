@@ -23,8 +23,8 @@ namespace Procajas.ViewModels
         public ProcessCheckoutViewModel()
         {
             this.store = StoreFactory.Get(StoreTypes.Test);
-            this.processList = Constants.ProcessList;
             this.AcceptButtonCommand = new DelegateCommand(this.DoProcessCheckout);
+            this.LoadProcessList();
         }
 
         #region public properties
@@ -50,6 +50,7 @@ namespace Procajas.ViewModels
         {
             get
             {
+                // TODO: MATERIALS SHOULD BE FETCHED FOM DB AND LISTED IN COMBOBOX OR AUTOCOMPLETE TEXTBOX
                 return this.material;
             }
             set
@@ -201,6 +202,11 @@ namespace Procajas.ViewModels
             };
 
             this.ConsumedMaterials = await this.store.GetMaterialsInProcess(resource);
+        }
+
+        private async void LoadProcessList()
+        {
+            this.processList = await this.store.GetAdminItemsByType(AdminItemTypes.Process);
         }
         #endregion
     }

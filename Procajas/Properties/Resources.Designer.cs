@@ -88,11 +88,47 @@ namespace Procajas.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} registro(s) fueron creados..
+        /// </summary>
+        public static string createNotificationText {
+            get {
+                return ResourceManager.GetString("createNotificationText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Crear.
+        /// </summary>
+        public static string createText {
+            get {
+                return ResourceManager.GetString("createText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fecha.
         /// </summary>
         public static string dateText {
             get {
                 return ResourceManager.GetString("dateText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} registro(s) fueron borrados..
+        /// </summary>
+        public static string deleteNotificationText {
+            get {
+                return ResourceManager.GetString("deleteNotificationText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Borrar.
+        /// </summary>
+        public static string deleteText {
+            get {
+                return ResourceManager.GetString("deleteText", resourceCulture);
             }
         }
         
@@ -156,6 +192,15 @@ namespace Procajas.Properties {
         public static string isValidText {
             get {
                 return ResourceManager.GetString("isValidText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nombre.
+        /// </summary>
+        public static string itemNameText {
+            get {
+                return ResourceManager.GetString("itemNameText", resourceCulture);
             }
         }
         
@@ -228,6 +273,15 @@ namespace Procajas.Properties {
         public static string noText {
             get {
                 return ResourceManager.GetString("noText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Operación.
+        /// </summary>
+        public static string operationText {
+            get {
+                return ResourceManager.GetString("operationText", resourceCulture);
             }
         }
         
@@ -336,6 +390,15 @@ namespace Procajas.Properties {
         public static string toUseText {
             get {
                 return ResourceManager.GetString("toUseText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tipo.
+        /// </summary>
+        public static string typeOfItemText {
+            get {
+                return ResourceManager.GetString("typeOfItemText", resourceCulture);
             }
         }
         

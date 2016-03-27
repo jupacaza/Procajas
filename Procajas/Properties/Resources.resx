@@ -216,4 +216,25 @@
   <data name="quantityCreatedText" xml:space="preserve">
     <value>Cantidad producida</value>
   </data>
+  <data name="createNotificationText" xml:space="preserve">
+    <value>{0} registro(s) fueron creados.</value>
+  </data>
+  <data name="createText" xml:space="preserve">
+    <value>Crear</value>
+  </data>
+  <data name="deleteNotificationText" xml:space="preserve">
+    <value>{0} registro(s) fueron borrados.</value>
+  </data>
+  <data name="deleteText" xml:space="preserve">
+    <value>Borrar</value>
+  </data>
+  <data name="itemNameText" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="operationText" xml:space="preserve">
+    <value>Operación</value>
+  </data>
+  <data name="typeOfItemText" xml:space="preserve">
+    <value>Tipo</value>
+  </data>
 </root>

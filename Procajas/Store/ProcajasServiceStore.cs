@@ -17,12 +17,27 @@ namespace Procajas.Store
             throw new NotImplementedException();
         }
 
+        public Task<bool> DeleteAdminItemByType(string item, AdminItemTypes adminItemType)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<List<string>> GetAdminItemsByType(AdminItemTypes adminItemType, IDictionary<string, string> filter = null)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<List<ProcessCheckoutConsumedMaterial>> GetMaterialsInProcess(MaterialsInProcessResource resource)
         {
             throw new NotImplementedException();
         }
 
         public Task<List<MaterialLocationQuantity>> GetQuantitiesPerLocation(QuantitiesPerLocationResource resource)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> InsertAdminItemByType(string item, AdminItemTypes adminItemType)
         {
             throw new NotImplementedException();
         }

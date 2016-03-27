@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Procajas.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,23 +8,18 @@ using System.Threading.Tasks;
 namespace Procajas
 {
     public class Constants
-    {
-        // TODO: Finish Process List
-        public enum Processes
+    {        
+        public static readonly List<TypeValueDescription> AdminOperationList = new List<TypeValueDescription>()
         {
-            IMP,
-            SUA,
-            COR,
-            ABU
-        }
-
-        public static readonly List<string> ProcessList = new List<string>()
-        {
-            Processes.IMP.ToString(),
-            Processes.SUA.ToString(),
-            Processes.COR.ToString(),
-            Processes.ABU.ToString()
+            new TypeValueDescription { Value = AdminOperations.Create, Description = Properties.Resources.createText },
+            new TypeValueDescription { Value = AdminOperations.Delete, Description = Properties.Resources.deleteText },
         };
 
+        public static readonly List<TypeValueDescription> AdminItemTypeList = new List<TypeValueDescription>()
+        {
+            new TypeValueDescription { Value = AdminItemTypes.Material, Description = Properties.Resources.materialText },
+            new TypeValueDescription { Value = AdminItemTypes.Process, Description = Properties.Resources.processText },
+            new TypeValueDescription { Value = AdminItemTypes.Location, Description = Properties.Resources.locationText },
+        };
     }
 }

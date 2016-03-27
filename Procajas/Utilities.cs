@@ -47,5 +47,15 @@ namespace Procajas
 
             return true;
         }
+
+        public static bool ValidateMaterialNameFormat(string material)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static bool ValidateProcessNameFormat(string process)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

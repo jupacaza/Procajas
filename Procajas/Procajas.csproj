@@ -71,6 +71,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Constants.cs" />
+    <Compile Include="Models\AdminItemTypes.cs" />
+    <Compile Include="Models\AdminOperations.cs" />
+    <Compile Include="Models\TypeValueDescription.cs" />
     <Compile Include="Store\IProcajasStore.cs" />
     <Compile Include="Models\MaterialLocationQuantity.cs" />
     <Compile Include="Store\ProcajasServiceStore.cs" />
@@ -78,10 +81,14 @@
     <Compile Include="StoreFactory.cs" />
     <Compile Include="Store\TestProcajasStore.cs" />
     <Compile Include="Utilities.cs" />
+    <Compile Include="ViewModels\AdministratorViewModel.cs" />
     <Compile Include="ViewModels\ProcessCheckinViewModel.cs" />
     <Compile Include="ViewModels\ProcessCheckoutViewModel.cs" />
     <Compile Include="ViewModels\WarehouseIncomingViewModel.cs" />
     <Compile Include="ViewModels\WarehouseOutgoingViewModel.cs" />
+    <Compile Include="Views\AdministratorView.xaml.cs">
+      <DependentUpon>AdministratorView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ProcessCheckinView.xaml.cs">
       <DependentUpon>ProcessCheckinView.xaml</DependentUpon>
     </Compile>
@@ -106,6 +113,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\AdministratorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ProcessCheckinView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -22,8 +22,8 @@ namespace Procajas.ViewModels
         public ProcessCheckinViewModel()
         {
             this.store = StoreFactory.Get(StoreTypes.Test);
-            this.processList = Constants.ProcessList;
             this.AcceptButtonCommand = new DelegateCommand(this.DoProcessCheckin);
+            this.LoadProcessList();
         }
 
         #region public properties
@@ -163,6 +163,11 @@ namespace Procajas.ViewModels
             };
 
             this.QuantitiesPerLocation = await this.store.GetQuantitiesPerLocation(qplResource);
+        }
+
+        private async void LoadProcessList()
+        {
+            this.processList = await this.store.GetAdminItemsByType(AdminItemTypes.Process);
         }
         #endregion
     }

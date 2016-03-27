@@ -22,6 +22,12 @@ namespace Procajas.Store
         Task<bool> InsertFinishedProduct(FinishedProductResource resource);
 
         Task<bool> InsertDiscrepanciesResources(List<DiscrepanciesResource> resourceList);
+
+        Task<List<string>> GetAdminItemsByType(AdminItemTypes adminItemType, IDictionary<string, string> filter = null);
+
+        Task<bool> InsertAdminItemByType(string item, AdminItemTypes adminItemType);
+
+        Task<bool> DeleteAdminItemByType(string item, AdminItemTypes adminItemType);
     }
 
     public class CheckoutResource
