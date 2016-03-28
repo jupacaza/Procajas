@@ -191,6 +191,11 @@ namespace Procajas.ViewModels
                 }
             }
 
+            if (!Utilities.ValidateMaterialName(this.selectedProcess, this.material))
+            {
+                return false;
+            }
+
             return true;
         }
 

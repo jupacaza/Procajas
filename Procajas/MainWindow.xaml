@@ -26,7 +26,7 @@
             <TabItem Header="{x:Static p:Resources.outputFromWarehouseText}">
                 <views:WarehouseOutgoingView />
             </TabItem>
-            <TabItem Header="{x:Static p:Resources.outputFromWarehouseText}">
+            <TabItem Header="{x:Static p:Resources.administratorText}">
                 <views:AdministratorView />
             </TabItem>
         </TabControl>

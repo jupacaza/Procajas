@@ -13,6 +13,7 @@ namespace Procajas.ViewModels
         private string selectedProcess;
         private List<string> processList;
         private string material;
+        private List<string> materialList;
         private DateTime checkinDate = DateTime.Now;
         private List<MaterialLocationQuantity> quantitiesPerLocation;
         private string destinationLocation;
@@ -36,12 +37,20 @@ namespace Procajas.ViewModels
             set
             {
                 this.SetProperty(ref this.selectedProcess, value);
+                this.LoadMaterialList();
             }
         }
 
-        public IList<string> ProcessList
+        public List<string> ProcessList
         {
-            get { return this.processList; }
+            get
+            {
+                return this.processList;
+            }
+            private set
+            {
+                this.SetProperty(ref this.processList, value);
+            }
         }
 
         public string Material
@@ -54,6 +63,18 @@ namespace Procajas.ViewModels
             {
                 this.SetProperty(ref this.material, value);
                 this.LoadQuantitiesPerLocation();
+            }
+        }
+
+        public List<string> MaterialList
+        {
+            get
+            {
+                return this.materialList;
+            }
+            private set
+            {
+                this.SetProperty(ref this.materialList, value);
             }
         }
 
@@ -167,7 +188,18 @@ namespace Procajas.ViewModels
 
         private async void LoadProcessList()
         {
-            this.processList = await this.store.GetAdminItemsByType(AdminItemTypes.Process);
+            this.ProcessList = await this.store.GetAdminItemsByType(AdminItemTypes.Process);
+        }
+
+        private async void LoadMaterialList()
+        {
+            // pass a filter to only pick materials that belong to the PRI process
+            Dictionary<bool, string> filter = new Dictionary<bool, string>()
+            {
+                { true, this.selectedProcess }
+            };
+
+            this.MaterialList = await this.store.GetAdminItemsByType(AdminItemTypes.Material, filter);
         }
         #endregion
     }

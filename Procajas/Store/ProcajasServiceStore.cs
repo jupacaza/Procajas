@@ -22,7 +22,7 @@ namespace Procajas.Store
             throw new NotImplementedException();
         }
 
-        public Task<List<string>> GetAdminItemsByType(AdminItemTypes adminItemType, IDictionary<string, string> filter = null)
+        public Task<List<string>> GetAdminItemsByType(AdminItemTypes adminItemType, IDictionary<bool, string> filter = null)
         {
             throw new NotImplementedException();
         }

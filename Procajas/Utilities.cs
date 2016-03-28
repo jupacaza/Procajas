@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Procajas
@@ -40,7 +41,7 @@ namespace Procajas
 
         public static bool ValidateMaterialName(string process, string material)
         {
-            if (process == null || material == null || process.Length != 3 || material.Length < 3 || !material.Substring(0, 3).Equals(process))
+            if (process == null || material == null || process.Length != 3 || material.Length < 3 || !material.Substring(0, 3).Equals(process, StringComparison.InvariantCultureIgnoreCase))
             {
                 return false;
             }
@@ -50,12 +51,14 @@ namespace Procajas
 
         public static bool ValidateMaterialNameFormat(string material)
         {
-            throw new NotImplementedException();
+            Regex rg = new Regex(@"^[a-zA-Z0-9]{3}_[a-zA-Z0-9]*$");
+            return rg.IsMatch(material);
         }
 
         public static bool ValidateProcessNameFormat(string process)
         {
-            throw new NotImplementedException();
+            Regex rg = new Regex(@"^[a-zA-Z0-9]{3}$");
+            return rg.IsMatch(process);
         }
     }
 }

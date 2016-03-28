@@ -237,4 +237,7 @@
   <data name="typeOfItemText" xml:space="preserve">
     <value>Tipo</value>
   </data>
+  <data name="administratorText" xml:space="preserve">
+    <value>Administrador</value>
+  </data>
 </root>

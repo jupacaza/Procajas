@@ -4,9 +4,6 @@ using Procajas.Models;
 using Procajas.Store;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Procajas.ViewModels
@@ -121,8 +118,25 @@ namespace Procajas.ViewModels
             {
                 return false;
             }
-
-            // TODO: validate material name format and process name format when necessary
+            
+            if (this.selectedItemType.Value is AdminItemTypes)
+            {
+                switch ((AdminItemTypes)this.selectedItemType.Value)
+                {
+                    case AdminItemTypes.Process:
+                        if (!Utilities.ValidateProcessNameFormat(this.itemName))
+                        {
+                            return false;
+                        }
+                        break;
+                    case AdminItemTypes.Material:
+                        if (!Utilities.ValidateMaterialNameFormat(this.itemName))
+                        {
+                            return false;
+                        }
+                        break;
+                }
+            }
 
             return true;
         }

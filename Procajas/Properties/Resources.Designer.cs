@@ -70,6 +70,15 @@ namespace Procajas.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Administrador.
+        /// </summary>
+        public static string administratorText {
+            get {
+                return ResourceManager.GetString("administratorText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancelar.
         /// </summary>
         public static string cancelText {

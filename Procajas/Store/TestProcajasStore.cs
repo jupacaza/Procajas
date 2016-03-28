@@ -18,8 +18,21 @@ namespace Procajas.Store
             "COR"
         };
 
-        private List<string> Materials = new List<string>();
-        private List<string> Locations = new List<string>();
+        private List<string> Materials = new List<string>()
+        {
+            "IMP_AdidasSoccer",
+            "SUA_EleganteCafe",
+            "COR_DeLeon",
+            "PRI_MateriaPrima1",
+            "CAJ_Elefante"
+        };
+
+        private List<string> Locations = new List<string>()
+        {
+            "A1",
+            "B2",
+            "C3"
+        };
 
         public Task<bool> CheckoutProcessResource(List<CheckoutProcessResource> resourceList)
         {
@@ -30,13 +43,39 @@ namespace Procajas.Store
         {
             return Task.FromResult(true);
         }
-
-        public Task<List<string>> GetAdminItemsByType(AdminItemTypes adminItemType, IDictionary<string, string> filter = null)
+        
+        public Task<List<string>> GetAdminItemsByType(AdminItemTypes adminItemType, IDictionary<bool, string> filter = null)
         {
             switch (adminItemType)
             {
                 case AdminItemTypes.Material:
-                    return Task.FromResult(this.Materials);
+                    if (filter != null)
+                    {
+                        // filter is only used in materials.
+                        // go through the materials and pick only the ones where:
+                        // 1. the key of the filter says true and the material name starts with the value of the filter
+                        // 2. the key of the filter says false and the material does not start with the value of the filter
+                        return Task.FromResult(this.Materials.Where(
+                            s =>
+                            {
+                                // go through each value of the filter
+                                foreach (KeyValuePair<bool, string> kvp in filter)
+                                {
+                                    // XOR will give true when the values are different. We know it's a match when the boolean values are the same.
+                                    if (kvp.Value != null && !(kvp.Key ^ s.StartsWith(kvp.Value, StringComparison.InvariantCultureIgnoreCase)))
+                                    {
+                                        return true;
+                                    }
+                                }
+
+                                return false;
+                            }
+                        ).ToList());
+                    }
+                    else
+                    {
+                        return Task.FromResult(this.Materials);
+                    }
                     
                 case AdminItemTypes.Process:
                     return Task.FromResult(this.Processes);

@@ -23,7 +23,7 @@ namespace Procajas.Store
 
         Task<bool> InsertDiscrepanciesResources(List<DiscrepanciesResource> resourceList);
 
-        Task<List<string>> GetAdminItemsByType(AdminItemTypes adminItemType, IDictionary<string, string> filter = null);
+        Task<List<string>> GetAdminItemsByType(AdminItemTypes adminItemType, IDictionary<bool, string> filter = null);
 
         Task<bool> InsertAdminItemByType(string item, AdminItemTypes adminItemType);
 

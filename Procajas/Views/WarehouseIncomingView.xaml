@@ -16,16 +16,18 @@
                     Text="{Binding InvoiceNumber, ValidatesOnExceptions=True, Mode=TwoWay}"/>
 
         <TextBlock HorizontalAlignment="Left" Margin="5" TextWrapping="Wrap" Text="{x:Static p:Resources.materialInputText}" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Width="200" Margin="5" TextWrapping="Wrap" VerticalAlignment="Top"
-                    Text="{Binding Material, ValidatesOnExceptions=True, Mode=TwoWay}"/>
+        <ComboBox HorizontalAlignment="Left" Width="200" Margin="5"
+                      ItemsSource="{Binding MaterialList}"
+                      SelectedValue="{Binding Material, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
         <TextBlock HorizontalAlignment="Left" Margin="5" TextWrapping="Wrap" Text="{x:Static p:Resources.quantityText}" VerticalAlignment="Top"/>
         <TextBox HorizontalAlignment="Left" Height="23" Width="200" Margin="5" TextWrapping="Wrap" VerticalAlignment="Top"
                     Text="{Binding Quantity, ValidatesOnExceptions=True, Mode=TwoWay}"/>
 
         <TextBlock HorizontalAlignment="Left" Margin="5" TextWrapping="Wrap" VerticalAlignment="Top" Text="{x:Static p:Resources.locationText}"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Width="200" Margin="5" TextWrapping="Wrap" VerticalAlignment="Top"
-                    Text="{Binding Location, ValidatesOnExceptions=True, Mode=TwoWay}"/>        
+        <ComboBox HorizontalAlignment="Left" Width="200" Margin="5"
+                      ItemsSource="{Binding LocationList}"
+                      SelectedValue="{Binding Location, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
         <Button Content="{x:Static p:Resources.acceptText}" Height="23" Width="50" Margin="5"
                 Command="{Binding AcceptButtonCommand}"/>

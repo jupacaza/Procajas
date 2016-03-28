@@ -18,6 +18,8 @@ namespace Procajas.ViewModels
         private string location;
         private DateTime checkinDate = DateTime.Now;
         private string invoiceNumber;
+        private List<string> materialList;
+        private List<string> locationList;
 
         private IProcajasStore store;
 
@@ -25,6 +27,8 @@ namespace Procajas.ViewModels
         {
             this.store = StoreFactory.Get(StoreTypes.Test);
             this.AcceptButtonCommand = new DelegateCommand(this.DoWarehouseCheckin);
+            this.LoadMaterialList();
+            this.LoadLocationList();
         }
 
         #region public properties
@@ -93,6 +97,26 @@ namespace Procajas.ViewModels
                 this.SetProperty(ref this.invoiceNumber, value);
             }
         }
+
+        public List<string> MaterialList
+        {
+            get
+            {
+                return this.materialList;
+            }
+            private set
+            {
+                this.SetProperty(ref this.materialList, value);
+            }
+        }
+
+        public List<string> LocationList
+        {
+            get
+            {
+                return this.locationList;
+            }
+        }
         #endregion
 
         #region commands
@@ -121,6 +145,22 @@ namespace Procajas.ViewModels
         {
             // TODO: Validate
             return true;
+        }
+
+        private async void LoadMaterialList()
+        {
+            // pass a filter to only pick materials that belong to the PRI process
+            Dictionary<bool, string> filter = new Dictionary<bool, string>()
+            {
+                { true, "PRI" }
+            };
+
+            this.MaterialList = await this.store.GetAdminItemsByType(AdminItemTypes.Material, filter);
+        }
+
+        private async void LoadLocationList()
+        {
+            this.locationList = await this.store.GetAdminItemsByType(AdminItemTypes.Location);
         }
         #endregion
     }
