@@ -26,11 +26,21 @@ namespace Procajas.Service.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=procajas.database.windows.net;Initial Catalog=Procajas;Persist Securi" +
-            "ty Info=True;User ID=procajas;Password=aBUGABER5")]
-        public string ProcajasConnectionString {
+        [global::System.Configuration.DefaultSettingValueAttribute("DefaultEndpointsProtocol=https;AccountName=procajas;AccountKey=pbQhhqseMwfPoqohSG" +
+            "7e4GXilaBLb1HY2cbmrvv+n8CLl3fo6EIBgK2etyvYb9hw7YVJaFPpggQO6FLc8oo2Lw==")]
+        public string StorageConnectionString {
             get {
-                return ((string)(this["ProcajasConnectionString"]));
+                return ((string)(this["StorageConnectionString"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("UseDevelopmentStorage=true")]
+        public string StorageEmulatorConnectionString {
+            get {
+                return ((string)(this["StorageEmulatorConnectionString"]));
             }
         }
     }
