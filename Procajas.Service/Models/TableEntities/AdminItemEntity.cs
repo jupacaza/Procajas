@@ -13,9 +13,29 @@ namespace Procajas.Service.Models.TableEntities
             this.PartitionKey = type;
             this.RowKey = name;
         }
-
-        public string Name;
-
-        public string Type;
+                
+        public string Name
+        {
+            get
+            {
+                return this.RowKey;
+            }
+            set
+            {
+                this.RowKey = value;
+            }
+        }
+        
+        public string Type
+        {
+            get
+            {
+                return this.PartitionKey;
+            }
+            set
+            {
+                this.PartitionKey = value;
+            }
+        }
     }
 }

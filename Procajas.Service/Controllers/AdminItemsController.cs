@@ -1,36 +1,21 @@
-﻿using Microsoft.Azure;
-using Microsoft.WindowsAzure.Storage;
-using Microsoft.WindowsAzure.Storage.Table;
+﻿using Microsoft.WindowsAzure.Storage.Table;
 using Newtonsoft.Json;
 using Procajas.Contracts;
 using Procajas.Service.Models.TableEntities;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace Procajas.Service.Controllers
 {
     //[Authorize]
-    public class AdminItemsController : ApiController
+    public class AdminItemsController : BaseController
     {
-        // TODO: put these in a settings class
-        CloudStorageAccount storageAccount;
-        CloudTableClient tableClient;
-        const string AdminItemsTableName = "adminItems";
-
-        public AdminItemsController()
-        {
-            // Get the storage account
-            storageAccount = CloudStorageAccount.Parse(CloudConfigurationManager.GetSetting("StorageEmulatorConnectionString"));
-
-            // Create the table client.
-            tableClient = storageAccount.CreateCloudTableClient();
-        }
-
         // GET adminItems/[material|process|location]
-        public string Get(string type)
+        public IEnumerable<AdminItemResource> Get([FromUri]string type)
         {
             // Retrieve a reference to the table.
-            CloudTable table = tableClient.GetTableReference("adminItems");
+            CloudTable table = this.serviceSettings.tableClient.GetTableReference(Constants.TableNames.AdminItems);
 
             // Construct the query operation for all customer entities where PartitionKey="Smith".
             TableQuery<AdminItemEntity> query = new TableQuery<AdminItemEntity>().Where(
@@ -42,26 +27,16 @@ namespace Procajas.Service.Controllers
                 adminItemsByType.Add(new AdminItemResource() { Name = entity.Name, Type = entity.Type });
             }
 
-            return JsonConvert.SerializeObject(adminItemsByType);
+            return adminItemsByType;
         }
 
         // POST adminItems
-        public IHttpActionResult Post([FromBody]string adminItemResource)
+        public IHttpActionResult Post([FromBody]AdminItemResource resource)
         {
-            AdminItemResource resource;
-            try
-            {
-                resource = JsonConvert.DeserializeObject<AdminItemResource>(adminItemResource);
-            }
-            catch (JsonSerializationException)
-            {
-                return this.BadRequest("The request body could not be deserialized into an AdminItem.");
-            }
-            
             AdminItemEntity entity = new AdminItemEntity(resource.Name, resource.Type);
 
             // Retrieve a reference to the table.
-            CloudTable table = tableClient.GetTableReference(AdminItemsTableName);
+            CloudTable table = this.serviceSettings.tableClient.GetTableReference(Constants.TableNames.AdminItems);
 
             // Create the table if it doesn't exist.
             table.CreateIfNotExists();
@@ -75,11 +50,11 @@ namespace Procajas.Service.Controllers
             return this.Ok();
         }
 
-        // DELETE adminItems/<type>/<name>
-        public IHttpActionResult Delete(string type, string name)
+        // DELETE adminItems/{type}/{name}
+        public IHttpActionResult Delete([FromUri]string type, [FromUri]string name)
         {
             // Create the CloudTable that represents the "people" table.
-            CloudTable table = tableClient.GetTableReference(AdminItemsTableName);
+            CloudTable table = this.serviceSettings.tableClient.GetTableReference(Constants.TableNames.AdminItems);
 
             // Create a retrieve operation that expects a customer entity.
             TableOperation retrieveOperation = TableOperation.Retrieve<AdminItemEntity>(type, name);
@@ -102,7 +77,7 @@ namespace Procajas.Service.Controllers
             }
             else
             {
-                return this.BadRequest("Delete operation failed because of wrong parameters.");
+                return this.BadRequest("Delete operation failed because the item to be deleted does not exist.");
             }
         }
     }

@@ -16,8 +16,8 @@ namespace Procajas.Service
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
+                routeTemplate: "{controller}/{type}/{name}",
+                defaults: new { type = RouteParameter.Optional, name = RouteParameter.Optional }
             );
         }
     }

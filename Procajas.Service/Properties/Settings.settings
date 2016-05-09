@@ -1,21 +1,5 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Procajas.Service.Properties" GeneratedClassName="Settings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)">
   <Profiles />
-  <Settings>
-    <Setting Name="StorageConnectionString" Type="(Connection string)" Scope="Application">
-      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
-&lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;ConnectionString&gt;DefaultEndpointsProtocol=https;AccountName=procajas;AccountKey=pbQhhqseMwfPoqohSG7e4GXilaBLb1HY2cbmrvv+n8CLl3fo6EIBgK2etyvYb9hw7YVJaFPpggQO6FLc8oo2Lw==&lt;/ConnectionString&gt;
-  &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
-&lt;/SerializableConnectionString&gt;</DesignTimeValue>
-      <Value Profile="(Default)">DefaultEndpointsProtocol=https;AccountName=procajas;AccountKey=pbQhhqseMwfPoqohSG7e4GXilaBLb1HY2cbmrvv+n8CLl3fo6EIBgK2etyvYb9hw7YVJaFPpggQO6FLc8oo2Lw==</Value>
-    </Setting>
-    <Setting Name="StorageEmulatorConnectionString" Type="(Connection string)" Scope="Application">
-      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
-&lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;ConnectionString&gt;UseDevelopmentStorage=true&lt;/ConnectionString&gt;
-&lt;/SerializableConnectionString&gt;</DesignTimeValue>
-      <Value Profile="(Default)">UseDevelopmentStorage=true</Value>
-    </Setting>
-  </Settings>
+  <Settings />
 </SettingsFile>

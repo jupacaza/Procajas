@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Procajas.Service", "Procaja
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Procajas.Contracts", "Procajas.Contracts\Procajas.Contracts.csproj", "{0EBE8CC7-DEA0-402F-8B56-C35A74D47DAA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Procajas.Service", "Test.Procajas.Service\Test.Procajas.Service.csproj", "{5E9F0A59-697A-4BB7-ADB9-D9798DAA1AE6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{0EBE8CC7-DEA0-402F-8B56-C35A74D47DAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0EBE8CC7-DEA0-402F-8B56-C35A74D47DAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0EBE8CC7-DEA0-402F-8B56-C35A74D47DAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E9F0A59-697A-4BB7-ADB9-D9798DAA1AE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E9F0A59-697A-4BB7-ADB9-D9798DAA1AE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E9F0A59-697A-4BB7-ADB9-D9798DAA1AE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E9F0A59-697A-4BB7-ADB9-D9798DAA1AE6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
