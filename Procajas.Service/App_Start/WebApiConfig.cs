@@ -29,7 +29,7 @@ namespace Procajas.Service
             config.Routes.MapHttpRoute(
                 name: "FinishedProductApi",
                 routeTemplate: "{controller}/{invoiceNumber}/{material}",
-                defaults: new { controller = "AdminItems", invoiceNumber = RouteParameter.Optional, material = RouteParameter.Optional }
+                defaults: new { controller = "FinishedProduct", invoiceNumber = RouteParameter.Optional, material = RouteParameter.Optional }
             );
 
             config.Routes.MapHttpRoute(
