@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Procajas.Models;
 
@@ -125,7 +124,7 @@ namespace Procajas.Store
             return Task.FromResult(true);
         }
 
-        public Task<bool> InsertDiscrepanciesResources(List<DiscrepanciesResource> resourceList)
+        public Task<bool> InsertDiscrepancyResources(List<DiscrepancyResource> resourceList)
         {
             return Task.FromResult(true);
         }

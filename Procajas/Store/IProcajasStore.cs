@@ -21,7 +21,7 @@ namespace Procajas.Store
 
         Task<bool> InsertFinishedProduct(FinishedProductResource resource);
 
-        Task<bool> InsertDiscrepanciesResources(List<DiscrepanciesResource> resourceList);
+        Task<bool> InsertDiscrepancyResources(List<DiscrepancyResource> resourceList);
 
         Task<List<string>> GetAdminItemsByType(AdminItemTypes adminItemType, IDictionary<bool, string> filter = null);
 
@@ -66,9 +66,10 @@ namespace Procajas.Store
     {
         public string Material { get; set; }
         public string Department { get; set; }
+        public int Quantity { get; set; }
         public DateTime ProcessCheckinDate { get; set; }
         public string Location { get; set; }
-        public IEnumerable<object> Details { get; set; }
+        public IDictionary<object,object> Details { get; set; }
     }
 
     public class FinishedProductResource
@@ -80,12 +81,12 @@ namespace Procajas.Store
         public string InvoiceNumber { get; set; }
     }
 
-    public class DiscrepanciesResource
+    public class DiscrepancyResource
     {
         public string Material { get; set; }
         public string Department { get; set; }
         public int Quantity { get; set; }
-        public DateTime DiscrepancieDate { get; set; }
+        public DateTime DiscrepancyDate { get; set; }
         public string Job { get; set; }
     }
 }

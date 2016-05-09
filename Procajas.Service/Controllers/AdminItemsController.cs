@@ -11,15 +11,23 @@ namespace Procajas.Service.Controllers
     //[Authorize]
     public class AdminItemsController : BaseController
     {
+        private CloudTable table;
+
+        public AdminItemsController() : base()
+        {
+            if (table == null)
+            {
+                // Retrieve a reference to the table.
+                table = this.serviceSettings.tableClient.GetTableReference(Constants.TableNames.AdminItems);
+            }
+        }
+
         // GET adminItems/[material|process|location]
         public IEnumerable<AdminItemResource> Get([FromUri]string type)
         {
-            // Retrieve a reference to the table.
-            CloudTable table = this.serviceSettings.tableClient.GetTableReference(Constants.TableNames.AdminItems);
-
             // Construct the query operation for all customer entities where PartitionKey="Smith".
             TableQuery<AdminItemEntity> query = new TableQuery<AdminItemEntity>().Where(
-                TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, type));
+                TableQuery.GenerateFilterCondition(Constants.PartitionKey, QueryComparisons.Equal, type));
 
             List<AdminItemResource> adminItemsByType = new List<AdminItemResource>();
             foreach (AdminItemEntity entity in table.ExecuteQuery(query))
@@ -34,9 +42,6 @@ namespace Procajas.Service.Controllers
         public IHttpActionResult Post([FromBody]AdminItemResource resource)
         {
             AdminItemEntity entity = new AdminItemEntity(resource.Name, resource.Type);
-
-            // Retrieve a reference to the table.
-            CloudTable table = this.serviceSettings.tableClient.GetTableReference(Constants.TableNames.AdminItems);
 
             // Create the table if it doesn't exist.
             table.CreateIfNotExists();
@@ -53,9 +58,6 @@ namespace Procajas.Service.Controllers
         // DELETE adminItems/{type}/{name}
         public IHttpActionResult Delete([FromUri]string type, [FromUri]string name)
         {
-            // Create the CloudTable that represents the "people" table.
-            CloudTable table = this.serviceSettings.tableClient.GetTableReference(Constants.TableNames.AdminItems);
-
             // Create a retrieve operation that expects a customer entity.
             TableOperation retrieveOperation = TableOperation.Retrieve<AdminItemEntity>(type, name);
 

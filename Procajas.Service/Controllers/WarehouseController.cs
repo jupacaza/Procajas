@@ -9,19 +9,27 @@ namespace Procajas.Service.Controllers
     //[Authorize]
     public class WarehouseController : BaseController
     {
+        private CloudTable table;
+
+        public WarehouseController() : base()
+        {
+            if (table == null)
+            {
+                // Retrieve a reference to the table.
+                table = this.serviceSettings.tableClient.GetTableReference(Constants.TableNames.WarehouseItems);
+            }
+        }
+
         // GET warehouse/{department}/{id}
         public IHttpActionResult Get([FromUri]string department, [FromUri]string id)
         {
-            // Retrieve a reference to the table.
-            CloudTable table = this.serviceSettings.tableClient.GetTableReference(Constants.TableNames.WarehouseItems);
-
             // Create a retrieve operation that takes a customer entity.
             TableOperation retrieveOperation = TableOperation.Retrieve<WarehouseEntity>(department, id);
 
             // Execute the retrieve operation.
             TableResult retrievedResult = table.Execute(retrieveOperation);
 
-            // Print the phone number of the result.
+            // Check if it was found
             if (retrievedResult.Result == null)
             {
                 return this.NotFound();
@@ -45,17 +53,14 @@ namespace Procajas.Service.Controllers
         // GET warehouse/{department}
         public IEnumerable<WarehouseResource> Get([FromUri]string department)
         {
-            // Retrieve a reference to the table.
-            CloudTable table = this.serviceSettings.tableClient.GetTableReference(Constants.TableNames.WarehouseItems);
-
             // Construct the query operation for all customer entities where PartitionKey="{department}".
             TableQuery<WarehouseEntity> query = new TableQuery<WarehouseEntity>().Where(
-                TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, department));
+                TableQuery.GenerateFilterCondition(Constants.PartitionKey, QueryComparisons.Equal, department));
 
-            List<WarehouseResource> warehouseItemsByDepartment = new List<WarehouseResource>();
+            List<WarehouseResource> itemsByDepartment = new List<WarehouseResource>();
             foreach (WarehouseEntity entity in table.ExecuteQuery(query))
             {
-                warehouseItemsByDepartment.Add(new WarehouseResource()
+                itemsByDepartment.Add(new WarehouseResource()
                 {
                     Id = entity.Id,
                     Material = entity.Material,
@@ -67,7 +72,7 @@ namespace Procajas.Service.Controllers
                 });
             }
 
-            return warehouseItemsByDepartment;
+            return itemsByDepartment;
         }
 
         // POST warehouse
@@ -82,9 +87,6 @@ namespace Procajas.Service.Controllers
                 Location = resource.Location,
                 InvoiceNumber = resource.InvoiceNumber
             };
-
-            // Retrieve a reference to the table.
-            CloudTable table = this.serviceSettings.tableClient.GetTableReference(Constants.TableNames.WarehouseItems);
 
             // Create the table if it doesn't exist.
             table.CreateIfNotExists();
@@ -104,9 +106,6 @@ namespace Procajas.Service.Controllers
         // PUT warehouse/{id}
         public IHttpActionResult Put([FromUri]string id, [FromBody]WarehouseResource resource)
         {
-            // Retrieve a reference to the table.
-            CloudTable table = this.serviceSettings.tableClient.GetTableReference(Constants.TableNames.WarehouseItems);
-
             // Create a retrieve operation that takes a customer entity.
             TableOperation retrieveOperation = TableOperation.Retrieve<WarehouseEntity>(resource.Department, id);
 

@@ -1,12 +1,17 @@
-﻿using Procajas.Models;
+﻿using Procajas.Clients;
+using Procajas.Contracts;
+using Procajas.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Procajas.Store
 {
     public class ProcajasServiceStore : IProcajasStore
     {
+        private ProcajasServiceClient client = new ProcajasServiceClient();
+
         public Task<bool> CheckoutProcessResource(List<CheckoutProcessResource> resourceList)
         {
             throw new NotImplementedException();
@@ -42,9 +47,33 @@ namespace Procajas.Store
             throw new NotImplementedException();
         }
 
-        public Task<bool> InsertDiscrepanciesResources(List<DiscrepanciesResource> resourceList)
+        public async Task<bool> InsertDiscrepancyResources(List<DiscrepancyResource> resourceList)
         {
-            throw new NotImplementedException();
+            List<Contracts.DiscrepancyResource> contractList = resourceList.Select(
+                (resource) =>
+                {
+                    Contracts.DiscrepancyResource contract = new Contracts.DiscrepancyResource()
+                    {
+                        Material = resource.Material,
+                        Department = resource.Department,
+                        Quantity = resource.Quantity,
+                        DiscrepancyDate = resource.DiscrepancyDate,
+                        Job = resource.Job
+                    };
+
+                    return contract;
+                }
+            ).ToList();
+
+            List<string> ids = await this.client.PostDiscrepancyResource(contractList);
+
+            // check if any id reports a client error
+            if (ids.Any(id => id.Equals(ProcajasServiceClient.ClientError)))
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public Task<bool> InsertFinishedProduct(FinishedProductResource resource)

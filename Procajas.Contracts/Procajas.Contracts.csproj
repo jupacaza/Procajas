@@ -45,7 +45,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdminItemResource.cs" />
+    <Compile Include="DiscrepancyResource.cs" />
+    <Compile Include="FinishedProductResource.cs" />
     <Compile Include="IdResource.cs" />
+    <Compile Include="ProcessResource.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WarehouseResource.cs" />
   </ItemGroup>

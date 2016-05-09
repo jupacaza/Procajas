@@ -15,9 +15,33 @@ namespace Procajas.Service
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
-                name: "DefaultApi",
+                name: "AdminItemsApi",
                 routeTemplate: "{controller}/{type}/{name}",
-                defaults: new { type = RouteParameter.Optional, name = RouteParameter.Optional }
+                defaults: new { controller = "AdminItems", type = RouteParameter.Optional, name = RouteParameter.Optional }
+            );
+
+            config.Routes.MapHttpRoute(
+                name: "DiscrepancyApi",
+                routeTemplate: "{controller}/{material}/{id}",
+                defaults: new { controller = "Discrepancy", material = RouteParameter.Optional, id = RouteParameter.Optional }
+            );
+
+            config.Routes.MapHttpRoute(
+                name: "FinishedProductApi",
+                routeTemplate: "{controller}/{invoiceNumber}/{material}",
+                defaults: new { controller = "AdminItems", invoiceNumber = RouteParameter.Optional, material = RouteParameter.Optional }
+            );
+
+            config.Routes.MapHttpRoute(
+                name: "ProcessApi",
+                routeTemplate: "{controller}/{department}",
+                defaults: new { controller = "Process", department = RouteParameter.Optional }
+            );
+
+            config.Routes.MapHttpRoute(
+                name: "WarehouseApi",
+                routeTemplate: "{controller}/{department}/{id}",
+                defaults: new { controller = "Warehouse", department = RouteParameter.Optional, id = RouteParameter.Optional }
             );
         }
     }

@@ -123,6 +123,7 @@ namespace Procajas.ViewModels
             if (this.ValidateFields())
             {
                 // Checkout from warehouse table
+                int totalQuantityToUse = 0;
                 List<CheckoutResource> checkoutResourceList = new List<CheckoutResource>();
                 foreach (MaterialLocationQuantity mlq in this.quantitiesPerLocation)
                 {
@@ -136,6 +137,7 @@ namespace Procajas.ViewModels
                         };
 
                         checkoutResourceList.Add(checkoutResource);
+                        totalQuantityToUse += mlq.QuantityToUse;
                     }
                 }
 
@@ -147,6 +149,7 @@ namespace Procajas.ViewModels
                     ProcessCheckinDate = this.checkinDate,
                     Material = this.material,
                     Department = this.selectedProcess,
+                    Quantity = totalQuantityToUse,
                     Location = this.destinationLocation
                 };
 

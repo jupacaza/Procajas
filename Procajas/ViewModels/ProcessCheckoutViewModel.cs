@@ -131,37 +131,40 @@ namespace Procajas.ViewModels
             {
                 // Checkout from process table
                 // Insert to Discrepancies table
-                List<CheckoutResource> checkoutResourceList = new List<CheckoutResource>();
-                List<DiscrepanciesResource> discrepanciesResourceList = new List<DiscrepanciesResource>();
+                List<CheckoutProcessResource> checkoutProcessResourceList = new List<CheckoutProcessResource>();
+                List<DiscrepancyResource> discrepanciesResourceList = new List<DiscrepancyResource>();
                 foreach (ProcessCheckoutConsumedMaterial consumedMaterial in this.consumedMaterials)
                 {
                     if (consumedMaterial.Selected && 
                         (consumedMaterial.ConsumedInt + consumedMaterial.ReturnedInt + consumedMaterial.ScrappedInt > 0))
                     {
-                        CheckoutResource checkoutResource = new CheckoutResource()
+                        CheckoutProcessResource checkoutProcessResource = new CheckoutProcessResource()
                         {
                             Material = consumedMaterial.Material,
                             Quantity = consumedMaterial.TotalQuantity,
                             Location = this.selectedProcess
                         };
 
-                        checkoutResourceList.Add(checkoutResource);
+                        checkoutProcessResourceList.Add(checkoutProcessResource);
 
-                        DiscrepanciesResource discrepanciesResource = new DiscrepanciesResource()
+                        if (consumedMaterial.ScrappedInt > 0)
                         {
-                            Department = this.selectedProcess,
-                            DiscrepancieDate = this.checkoutDate,
-                            Material = consumedMaterial.Material,
-                            Job = this.material,
-                            Quantity = consumedMaterial.ScrappedInt
-                        };
+                            DiscrepancyResource discrepanciesResource = new DiscrepancyResource()
+                            {
+                                Department = this.selectedProcess,
+                                DiscrepancyDate = this.checkoutDate,
+                                Material = consumedMaterial.Material,
+                                Job = this.material,
+                                Quantity = consumedMaterial.ScrappedInt
+                            };
 
-                        discrepanciesResourceList.Add(discrepanciesResource);
+                            discrepanciesResourceList.Add(discrepanciesResource);
+                        }
                     }
                 }
 
-                await this.store.CheckoutWarehouseResource(checkoutResourceList);
-                await this.store.InsertDiscrepanciesResources(discrepanciesResourceList);
+                await this.store.CheckoutProcessResource(checkoutProcessResourceList);
+                await this.store.InsertDiscrepancyResources(discrepanciesResourceList);
 
                 // Insert to Warehouse table
                 WarehouseResource warehouseResource = new WarehouseResource()

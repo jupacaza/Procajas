@@ -21,7 +21,7 @@ namespace Procajas.Service.Settings
                 if (serviceSettings == null)
                 {
                     // Get the storage account
-                    CloudStorageAccount newStorageAccount = CloudStorageAccount.Parse(CloudConfigurationManager.GetSetting("StorageConnectionString"));
+                    CloudStorageAccount newStorageAccount = CloudStorageAccount.Parse(CloudConfigurationManager.GetSetting(Constants.StorageConnectionString));
 
                     // Create the table client.
                     CloudTableClient newTableClient = newStorageAccount.CreateCloudTableClient();
