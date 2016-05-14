@@ -12,39 +12,45 @@ namespace Procajas.Store
     {
         private ProcajasServiceClient client = new ProcajasServiceClient();
 
-        public Task<bool> CheckoutProcessResource(List<CheckoutProcessResource> resourceList)
+        public async Task<bool> CheckoutProcessResource(List<CheckoutProcessResource> resourceList)
         {
             throw new NotImplementedException();
         }
 
-        public Task<bool> CheckoutWarehouseResource(List<CheckoutResource> resourceList)
+        public async Task<bool> CheckoutWarehouseResource(List<CheckoutResource> resourceList)
         {
             throw new NotImplementedException();
         }
 
-        public Task<bool> DeleteAdminItemByType(string item, AdminItemTypes adminItemType)
+        public async Task<bool> DeleteAdminItemByType(string item, AdminItemTypes adminItemType)
+        {
+            return await this.client.DeleteAdminItem(adminItemType.ToString(), item);
+        }
+
+        public async Task<List<string>> GetAdminItemsByType(AdminItemTypes adminItemType, IDictionary<bool, string> filter = null)
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<string>> GetAdminItemsByType(AdminItemTypes adminItemType, IDictionary<bool, string> filter = null)
+        public async Task<List<ProcessCheckoutConsumedMaterial>> GetMaterialsInProcess(MaterialsInProcessResource resource)
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<ProcessCheckoutConsumedMaterial>> GetMaterialsInProcess(MaterialsInProcessResource resource)
+        public async Task<List<MaterialLocationQuantity>> GetQuantitiesPerLocation(QuantitiesPerLocationResource resource)
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<MaterialLocationQuantity>> GetQuantitiesPerLocation(QuantitiesPerLocationResource resource)
+        public async Task<bool> InsertAdminItemByType(string item, AdminItemTypes adminItemType)
         {
-            throw new NotImplementedException();
-        }
+            Contracts.AdminItemResource contract = new Contracts.AdminItemResource()
+            {
+                Name = item,
+                Type = adminItemType.ToString()
+            };
 
-        public Task<bool> InsertAdminItemByType(string item, AdminItemTypes adminItemType)
-        {
-            throw new NotImplementedException();
+            return await this.client.PostAdminItem(contract);
         }
 
         public async Task<bool> InsertDiscrepancyResources(List<DiscrepancyResource> resourceList)
@@ -65,30 +71,58 @@ namespace Procajas.Store
                 }
             ).ToList();
 
-            List<string> ids = await this.client.PostDiscrepancyResource(contractList);
+            List<string> ids = await this.client.PostDiscrepancies(contractList);
 
-            // check if any id reports a client error
-            if (ids.Any(id => id.Equals(ProcajasServiceClient.ClientError)))
+            // if the list is empty, then the operation was unsuccessful
+            return ids.Count == 0 ? false : true;
+        }
+
+        public async Task<bool> InsertFinishedProduct(FinishedProductResource resource)
+        {
+            Contracts.FinishedProductResource contract = new Contracts.FinishedProductResource()
             {
-                return false;
-            }
+                Material = resource.Material,
+                Quantity = resource.Quantity,
+                FinishDate = resource.FinishDate,
+                Location = resource.Location,
+                InvoiceNumber = resource.InvoiceNumber
+            };
 
-            return true;
+            return await this.client.PostFinishedProduct(contract);
         }
 
-        public Task<bool> InsertFinishedProduct(FinishedProductResource resource)
+        public async Task<bool> InsertProcessResource(ProcessResource resource)
         {
-            throw new NotImplementedException();
+            Contracts.ProcessResource contract = new Contracts.ProcessResource()
+            {
+                Material = resource.Material,
+                Quantity = resource.Quantity,
+                Department = resource.Department,
+                ProcessCheckinDate = resource.ProcessCheckinDate,
+                Location = resource.Location,
+                Details = resource.Details
+            };
+
+            string processId = await this.client.PostProcess(contract);
+
+            return string.IsNullOrEmpty(processId) ? false : true;
         }
 
-        public Task<bool> InsertProcessResource(ProcessResource resource)
+        public async Task<bool> InsertWarehouseResource(WarehouseResource resource)
         {
-            throw new NotImplementedException();
-        }
+            Contracts.WarehouseResource contract = new Contracts.WarehouseResource()
+            {
+                Material = resource.Material,
+                Quantity = resource.Quantity,
+                Department = resource.Department,
+                DateOfInsertion = resource.DateOfInsertion,
+                Location = resource.Location,
+                InvoiceNumber = resource.InvoiceNumber
+            };
 
-        public Task<bool> InsertWarehouseResource(WarehouseResource resource)
-        {
-            throw new NotImplementedException();
+            string id = await this.client.PostWarehouse(contract);
+
+            return string.IsNullOrEmpty(id) ? false : true;
         }
     }
 }

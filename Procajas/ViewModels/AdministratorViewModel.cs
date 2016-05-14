@@ -20,7 +20,7 @@ namespace Procajas.ViewModels
 
         public AdministratorViewModel()
         {
-            this.store = StoreFactory.Get(StoreTypes.Test);
+            this.store = StoreFactory.Get(StoreTypes.ProcajasService);
             this.adminOperations = Constants.AdminOperationList;
             this.itemTypes = Constants.AdminItemTypeList;
             this.AcceptButtonCommand = new DelegateCommand(this.DoAdministratorOperation);

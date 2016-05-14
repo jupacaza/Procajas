@@ -9,13 +9,13 @@ namespace Test.Procajas.Service
     [TestClass]
     public class TestAdminItemsController : TestBase
     {
-        private static AdminItemsController Controller;
+        private static AdminItemController Controller;
 
         [ClassInitialize]
         public static void ClassInitialize(TestContext context)
         {
             AzureStorageEmulatorStart();
-            Controller = new AdminItemsController();
+            Controller = new AdminItemController();
         }
 
         [ClassCleanup]

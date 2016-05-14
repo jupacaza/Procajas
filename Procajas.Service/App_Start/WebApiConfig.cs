@@ -15,33 +15,39 @@ namespace Procajas.Service
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
-                name: "AdminItemsApi",
-                routeTemplate: "{controller}/{type}/{name}",
-                defaults: new { controller = "AdminItems", type = RouteParameter.Optional, name = RouteParameter.Optional }
+                name: "AdminItemApi",
+                routeTemplate: "api/{controller}/{type}/{name}",
+                defaults: new { controller = "AdminItem", type = RouteParameter.Optional, name = RouteParameter.Optional }
             );
 
             config.Routes.MapHttpRoute(
                 name: "DiscrepancyApi",
-                routeTemplate: "{controller}/{material}/{id}",
+                routeTemplate: "api/{controller}/{material}/{id}",
                 defaults: new { controller = "Discrepancy", material = RouteParameter.Optional, id = RouteParameter.Optional }
             );
 
             config.Routes.MapHttpRoute(
                 name: "FinishedProductApi",
-                routeTemplate: "{controller}/{invoiceNumber}/{material}",
+                routeTemplate: "api/{controller}/{invoiceNumber}/{material}",
                 defaults: new { controller = "FinishedProduct", invoiceNumber = RouteParameter.Optional, material = RouteParameter.Optional }
             );
 
             config.Routes.MapHttpRoute(
                 name: "ProcessApi",
-                routeTemplate: "{controller}/{department}",
+                routeTemplate: "api/{controller}/{department}",
                 defaults: new { controller = "Process", department = RouteParameter.Optional }
             );
 
             config.Routes.MapHttpRoute(
                 name: "WarehouseApi",
-                routeTemplate: "{controller}/{department}/{id}",
+                routeTemplate: "api/{controller}/{department}/{id}",
                 defaults: new { controller = "Warehouse", department = RouteParameter.Optional, id = RouteParameter.Optional }
+            );
+
+            config.Routes.MapHttpRoute(
+                name: "DefaultApi",
+                routeTemplate: "api/{controller}/{id}",
+                defaults: new { id = RouteParameter.Optional }
             );
         }
     }

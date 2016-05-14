@@ -9,11 +9,11 @@ using System.Web.Http;
 namespace Procajas.Service.Controllers
 {
     //[Authorize]
-    public class AdminItemsController : BaseController
+    public class AdminItemController : BaseController
     {
         private CloudTable table;
 
-        public AdminItemsController() : base()
+        public AdminItemController() : base()
         {
             if (table == null)
             {
@@ -22,7 +22,7 @@ namespace Procajas.Service.Controllers
             }
         }
 
-        // GET adminItems/[material|process|location]
+        // GET adminItem/[material|process|location]
         public IEnumerable<AdminItemResource> Get([FromUri]string type)
         {
             // Construct the query operation for all customer entities where PartitionKey="Smith".
@@ -38,7 +38,7 @@ namespace Procajas.Service.Controllers
             return adminItemsByType;
         }
 
-        // POST adminItems
+        // POST adminItem
         public IHttpActionResult Post([FromBody]AdminItemResource resource)
         {
             AdminItemEntity entity = new AdminItemEntity(resource.Name, resource.Type);
@@ -55,7 +55,7 @@ namespace Procajas.Service.Controllers
             return this.Ok();
         }
 
-        // DELETE adminItems/{type}/{name}
+        // DELETE adminItem/{type}/{name}
         public IHttpActionResult Delete([FromUri]string type, [FromUri]string name)
         {
             // Create a retrieve operation that expects a customer entity.
