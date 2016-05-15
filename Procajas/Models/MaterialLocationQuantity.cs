@@ -1,9 +1,5 @@
 ﻿using Prism.Mvvm;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Procajas.Models
 {
@@ -13,6 +9,10 @@ namespace Procajas.Models
         private string location;
         private int existingQuantity;
         private int quantityToUse;
+
+        public string Id { get; set; }
+
+        public string Material { get; set; }
 
         public bool Selected
         {

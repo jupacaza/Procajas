@@ -96,15 +96,16 @@ namespace Procajas.ViewModels
         {
             if (this.ValidateFields())
             {
-                List<CheckoutResource> checkoutResourceList = new List<CheckoutResource>();
+                List<CheckoutWarehouseResource> checkoutResourceList = new List<CheckoutWarehouseResource>();
                 int finalQuantity = 0;
 
                 foreach(MaterialLocationQuantity mlc in this.quantitiesPerLocation)
                 {
                     if (mlc.Selected == true && mlc.QuantityToUse > 0)
                     {
-                        CheckoutResource resource = new CheckoutResource()
+                        CheckoutWarehouseResource resource = new CheckoutWarehouseResource()
                         {
+                            Id = mlc.Id,
                             Material = this.material,
                             Quantity = mlc.QuantityToUse,
                             Location = mlc.Location
@@ -115,7 +116,7 @@ namespace Procajas.ViewModels
                     }
                 }
 
-                await this.store.CheckoutWarehouseResource(checkoutResourceList);
+                await this.store.CheckoutFromWarehouse(checkoutResourceList);
 
                 FinishedProductResource finishedProductResource = new FinishedProductResource()
                 {
@@ -138,12 +139,7 @@ namespace Procajas.ViewModels
 
         private async void LoadQuantitiesPerLocation()
         {
-            QuantitiesPerLocationResource qplResource = new QuantitiesPerLocationResource()
-            {
-                Material = this.material
-            };
-
-            this.QuantitiesPerLocation = await this.store.GetQuantitiesPerLocation(qplResource);
+            this.QuantitiesPerLocation = await this.store.GetQuantitiesPerLocationOfMaterial(this.material);
         }
         #endregion
     }

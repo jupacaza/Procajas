@@ -140,6 +140,7 @@ namespace Procajas.ViewModels
                     {
                         CheckoutProcessResource checkoutProcessResource = new CheckoutProcessResource()
                         {
+                            Id = consumedMaterial.Id,
                             Material = consumedMaterial.Material,
                             Quantity = consumedMaterial.TotalQuantity,
                             Location = this.selectedProcess
@@ -163,7 +164,7 @@ namespace Procajas.ViewModels
                     }
                 }
 
-                await this.store.CheckoutProcessResource(checkoutProcessResourceList);
+                await this.store.CheckoutFromProcess(checkoutProcessResourceList);
                 await this.store.InsertDiscrepancyResources(discrepanciesResourceList);
 
                 // Insert to Warehouse table
@@ -204,12 +205,7 @@ namespace Procajas.ViewModels
 
         private async void LoadMaterialsInThisProcess()
         {
-            MaterialsInProcessResource resource = new MaterialsInProcessResource()
-            {
-                Process = this.selectedProcess
-            };
-
-            this.ConsumedMaterials = await this.store.GetMaterialsInProcess(resource);
+            this.ConsumedMaterials = await this.store.GetMaterialsInProcess(this.selectedProcess);
         }
 
         private async void LoadProcessList()

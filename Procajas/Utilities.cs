@@ -51,13 +51,13 @@ namespace Procajas
 
         public static bool ValidateMaterialNameFormat(string material)
         {
-            Regex rg = new Regex(@"^[a-zA-Z0-9]{3}_[a-zA-Z0-9]*$");
+            Regex rg = new Regex(@"^[A-Z0-9]{3}_[a-zA-Z0-9]*$");
             return rg.IsMatch(material);
         }
 
         public static bool ValidateProcessNameFormat(string process)
         {
-            Regex rg = new Regex(@"^[a-zA-Z0-9]{3}$");
+            Regex rg = new Regex(@"^[A-Z0-9]{3}$");
             return rg.IsMatch(process);
         }
     }

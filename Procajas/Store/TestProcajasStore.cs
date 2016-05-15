@@ -33,17 +33,17 @@ namespace Procajas.Store
             "C3"
         };
 
-        public Task<bool> CheckoutProcessResource(List<CheckoutProcessResource> resourceList)
+        public Task<bool> CheckoutFromProcess(List<CheckoutProcessResource> resourceList)
         {
             return Task.FromResult(true);
         }
 
-        public Task<bool> CheckoutWarehouseResource(List<CheckoutResource> resourceList)
+        public Task<bool> CheckoutFromWarehouse(List<CheckoutWarehouseResource> resourceList)
         {
             return Task.FromResult(true);
         }
         
-        public Task<List<string>> GetAdminItemsByType(AdminItemTypes adminItemType, IDictionary<bool, string> filter = null)
+        public Task<List<string>> GetAdminItemsByType(AdminItemTypes adminItemType, IDictionary<string, bool> filter = null)
         {
             switch (adminItemType)
             {
@@ -58,10 +58,10 @@ namespace Procajas.Store
                             s =>
                             {
                                 // go through each value of the filter
-                                foreach (KeyValuePair<bool, string> kvp in filter)
+                                foreach (KeyValuePair<string, bool> kvp in filter)
                                 {
                                     // XOR will give true when the values are different. We know it's a match when the boolean values are the same.
-                                    if (kvp.Value != null && !(kvp.Key ^ s.StartsWith(kvp.Value, StringComparison.InvariantCultureIgnoreCase)))
+                                    if (!string.IsNullOrEmpty(kvp.Key) && !(kvp.Value ^ s.StartsWith(kvp.Key, StringComparison.InvariantCultureIgnoreCase)))
                                     {
                                         return true;
                                     }
@@ -86,7 +86,7 @@ namespace Procajas.Store
             return Task.FromResult(new List<string>());
         }
 
-        public Task<List<ProcessCheckoutConsumedMaterial>> GetMaterialsInProcess(MaterialsInProcessResource resource)
+        public Task<List<ProcessCheckoutConsumedMaterial>> GetMaterialsInProcess(string process)
         {
             List<ProcessCheckoutConsumedMaterial> pccList = new List<ProcessCheckoutConsumedMaterial>()
             {
@@ -99,7 +99,7 @@ namespace Procajas.Store
             return Task.FromResult(pccList);
         }
 
-        public Task<List<MaterialLocationQuantity>> GetQuantitiesPerLocation(QuantitiesPerLocationResource resource)
+        public Task<List<MaterialLocationQuantity>> GetQuantitiesPerLocationOfMaterial(string material)
         {
             List<MaterialLocationQuantity> mlqList = new List<MaterialLocationQuantity>();
 

@@ -60,16 +60,20 @@ namespace Procajas.Service.Controllers
             List<WarehouseResource> itemsByDepartment = new List<WarehouseResource>();
             foreach (WarehouseEntity entity in table.ExecuteQuery(query))
             {
-                itemsByDepartment.Add(new WarehouseResource()
+                // return only entities with quantity > 0
+                if (entity.Quantity > 0)
                 {
-                    Id = entity.Id,
-                    Material = entity.Material,
-                    Department = entity.Department,
-                    Quantity = entity.Quantity,
-                    DateOfInsertion = entity.DateOfInsertion,
-                    Location = entity.Location,
-                    InvoiceNumber = entity.InvoiceNumber
-                });
+                    itemsByDepartment.Add(new WarehouseResource()
+                    {
+                        Id = entity.Id,
+                        Material = entity.Material,
+                        Department = entity.Department,
+                        Quantity = entity.Quantity,
+                        DateOfInsertion = entity.DateOfInsertion,
+                        Location = entity.Location,
+                        InvoiceNumber = entity.InvoiceNumber
+                    });
+                }                                
             }
 
             return itemsByDepartment;
@@ -138,6 +142,45 @@ namespace Procajas.Service.Controllers
             IdResource idResource = new IdResource() { Id = updateEntity.Id };
 
             return this.Ok(idResource);
+        }
+
+        // PUT warehouse/{id}
+        public IHttpActionResult Put([FromBody]IDictionary<string, WarehouseResource> idsAndResources)
+        {
+            // Create the batch operation.
+            TableBatchOperation batchOperation = new TableBatchOperation();
+
+            foreach (KeyValuePair<string, WarehouseResource> idResourcePair in idsAndResources)
+            {
+                // Create a retrieve operation that takes a customer entity.
+                TableOperation retrieveOperation = TableOperation.Retrieve<WarehouseEntity>(idResourcePair.Value.Department, idResourcePair.Key);
+
+                // Execute the operation.
+                TableResult retrievedResult = table.Execute(retrieveOperation);
+
+                // Assign the result to a CustomerEntity object.
+                WarehouseEntity updateEntity = (WarehouseEntity)retrievedResult.Result;
+
+                if (updateEntity == null)
+                {
+                    // The Warehouse item to be updated could not be found.
+                    return this.NotFound();
+                }
+
+                // Change the properties (id stays the same)
+                updateEntity.Material = idResourcePair.Value.Material;
+                updateEntity.Quantity = idResourcePair.Value.Quantity;
+                updateEntity.DateOfInsertion = idResourcePair.Value.DateOfInsertion;
+                updateEntity.Location = idResourcePair.Value.Location;
+                updateEntity.InvoiceNumber = idResourcePair.Value.InvoiceNumber;
+
+                batchOperation.Replace(updateEntity);
+            }
+
+            // Execute the batch operation.
+            table.ExecuteBatch(batchOperation);
+            
+            return this.Ok();
         }
     }
 }

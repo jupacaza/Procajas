@@ -25,5 +25,19 @@ namespace Procajas.Contracts
 
         [JsonProperty("invoiceNumber")]
         public string InvoiceNumber { get; set; }
+
+        public WarehouseResource Copy()
+        {
+            return new WarehouseResource()
+            {
+                Id = this.Id,
+                Material = this.Material,
+                Department = this.Department,
+                Quantity = this.Quantity,
+                DateOfInsertion = this.DateOfInsertion,
+                Location = this.Location,
+                InvoiceNumber = this.InvoiceNumber
+            };
+        }
     }
 }

@@ -124,13 +124,14 @@ namespace Procajas.ViewModels
             {
                 // Checkout from warehouse table
                 int totalQuantityToUse = 0;
-                List<CheckoutResource> checkoutResourceList = new List<CheckoutResource>();
+                List<CheckoutWarehouseResource> checkoutResourceList = new List<CheckoutWarehouseResource>();
                 foreach (MaterialLocationQuantity mlq in this.quantitiesPerLocation)
                 {
                     if (mlq.Selected && mlq.QuantityToUse > 0)
                     {
-                        CheckoutResource checkoutResource = new CheckoutResource()
+                        CheckoutWarehouseResource checkoutResource = new CheckoutWarehouseResource()
                         {
+                            Id = mlq.Id,
                             Material = this.material,
                             Location = mlq.Location,
                             Quantity = mlq.QuantityToUse
@@ -141,7 +142,7 @@ namespace Procajas.ViewModels
                     }
                 }
 
-                await store.CheckoutWarehouseResource(checkoutResourceList);
+                await store.CheckoutFromWarehouse(checkoutResourceList);
 
                 // Insert new record to process table
                 ProcessResource processResource = new ProcessResource()
@@ -181,12 +182,7 @@ namespace Procajas.ViewModels
 
         private async void LoadQuantitiesPerLocation()
         {
-            QuantitiesPerLocationResource qplResource = new QuantitiesPerLocationResource()
-            {
-                Material = this.material
-            };
-
-            this.QuantitiesPerLocation = await this.store.GetQuantitiesPerLocation(qplResource);
+            this.QuantitiesPerLocation = await this.store.GetQuantitiesPerLocationOfMaterial(this.material);
         }
 
         private async void LoadProcessList()
@@ -196,10 +192,10 @@ namespace Procajas.ViewModels
 
         private async void LoadMaterialList()
         {
-            // pass a filter to only pick materials that belong to the PRI process
-            Dictionary<bool, string> filter = new Dictionary<bool, string>()
+            // pass a filter to only pick materials that belong to the "XXX" process
+            Dictionary<string, bool> filter = new Dictionary<string, bool>()
             {
-                { true, this.selectedProcess }
+                { this.selectedProcess, true }
             };
 
             this.MaterialList = await this.store.GetAdminItemsByType(AdminItemTypes.Material, filter);

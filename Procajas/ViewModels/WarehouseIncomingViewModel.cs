@@ -149,10 +149,10 @@ namespace Procajas.ViewModels
 
         private async void LoadMaterialList()
         {
-            // pass a filter to only pick materials that belong to the PRI process
-            Dictionary<bool, string> filter = new Dictionary<bool, string>()
+            // pass a filter to only pick materials that belong to the "XXX" process
+            Dictionary<string, bool> filter = new Dictionary<string, bool>()
             {
-                { true, "PRI" }
+                { "PRI", true }
             };
 
             this.MaterialList = await this.store.GetAdminItemsByType(AdminItemTypes.Material, filter);

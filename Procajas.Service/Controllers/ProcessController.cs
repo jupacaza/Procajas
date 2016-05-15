@@ -29,16 +29,20 @@ namespace Procajas.Service.Controllers
             List<ProcessResource> itemsByDepartment = new List<ProcessResource>();
             foreach (ProcessEntity entity in table.ExecuteQuery(query))
             {
-                itemsByDepartment.Add(new ProcessResource()
+                // return only entities with quantity > 0
+                if (entity.Quantity > 0)
                 {
-                    Id = entity.Id,
-                    Material = entity.Material,
-                    Department = entity.Department,
-                    Quantity = entity.Quantity,
-                    ProcessCheckinDate = entity.ProcessCheckinDate,
-                    Location = entity.Location,
-                    Details = entity.Details
-                });
+                    itemsByDepartment.Add(new ProcessResource()
+                    {
+                        Id = entity.Id,
+                        Material = entity.Material,
+                        Department = entity.Department,
+                        Quantity = entity.Quantity,
+                        ProcessCheckinDate = entity.ProcessCheckinDate,
+                        Location = entity.Location,
+                        Details = entity.Details
+                    });
+                }
             }
 
             return itemsByDepartment;

@@ -1,5 +1,4 @@
 ﻿using Procajas.Clients;
-using Procajas.Contracts;
 using Procajas.Models;
 using System;
 using System.Collections.Generic;
@@ -12,14 +11,51 @@ namespace Procajas.Store
     {
         private ProcajasServiceClient client = new ProcajasServiceClient();
 
-        public async Task<bool> CheckoutProcessResource(List<CheckoutProcessResource> resourceList)
+        public async Task<bool> CheckoutFromProcess(List<CheckoutProcessResource> resourceList)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<bool> CheckoutWarehouseResource(List<CheckoutResource> resourceList)
+        public async Task<bool> CheckoutFromWarehouse(List<CheckoutWarehouseResource> resourceList)
         {
-            throw new NotImplementedException();
+            bool success = true;
+            Dictionary<string, Contracts.WarehouseResource> resourcesToUpdate = new Dictionary<string, Contracts.WarehouseResource>();
+
+            // TODO: BATCH UPDATES CAN ONLY BE DONE ON THE SAME PARTITION (in this case department)
+            // THESE UPDATES HAVE TO BE SEGMENTED INTO PARTITIONS
+
+            // go through all the resources
+            foreach(CheckoutWarehouseResource resource in resourceList)
+            {
+                // get the specific item from the warehouse
+                Contracts.WarehouseResource itemInStore = await this.client.GetWarehouseResourceByDepartmentAndId(Utilities.GetDepartmentFromMaterial(resource.Material), resource.Id);
+
+                // compare quantity in store and quantity to use
+                if (resource.Quantity > itemInStore.Quantity)
+                {
+                    // if the quantity to use is more than the quantity in store: fail and do not update anything
+                    success = false;
+                    break;
+                }
+
+                // substract quantity to use from quantity in store and prepare the record to update in store
+                Contracts.WarehouseResource itemToUpdate = itemInStore.Copy();
+                itemToUpdate.Quantity = itemInStore.Quantity - resource.Quantity;
+                resourcesToUpdate.Add(itemToUpdate.Id, itemToUpdate);
+            }
+
+            if (success)
+            {
+                // do an atomic batch update of the items
+                bool updateSuccess = await this.client.PutWarehouse(resourcesToUpdate);
+                if (!updateSuccess)
+                {
+                    // if the batch update fails, the checkout should fail
+                    success = false;
+                }
+            }
+
+            return success;
         }
 
         public async Task<bool> DeleteAdminItemByType(string item, AdminItemTypes adminItemType)
@@ -27,19 +63,82 @@ namespace Procajas.Store
             return await this.client.DeleteAdminItem(adminItemType.ToString(), item);
         }
 
-        public async Task<List<string>> GetAdminItemsByType(AdminItemTypes adminItemType, IDictionary<bool, string> filter = null)
+        public async Task<List<string>> GetAdminItemsByType(AdminItemTypes adminItemType, IDictionary<string, bool> filter = null)
         {
-            throw new NotImplementedException();
+            List<string> adminItemsByType = await this.client.ListAdminItemsByType(adminItemType.ToString());
+            if (filter == null)
+            {
+                return adminItemsByType;
+            }
+            
+            // go through the adminItems and pick only the ones where:
+            // 1. the value of the filter says true and the material name starts with the key of the filter
+            // 2. the value of the filter says false and the material does not start with the key of the filter
+            return adminItemsByType.Where(
+                s =>
+                {
+                    // go through each value of the filter
+                    foreach (KeyValuePair<string, bool> kvp in filter)
+                    {
+                        // XOR will give true when the values are different. We know it's a match when the boolean values are the same, hence the NOT.
+                        if (!string.IsNullOrEmpty(kvp.Key) && !(kvp.Value ^ s.StartsWith(kvp.Key, StringComparison.InvariantCultureIgnoreCase)))
+                        {
+                            return true;
+                        }
+                    }
+
+                    return false;
+                }
+            ).ToList();
+        }
+        
+        public async Task<List<ProcessCheckoutConsumedMaterial>> GetMaterialsInProcess(string process)
+        {
+            List<ProcessCheckoutConsumedMaterial> processMaterials;
+            List<Contracts.ProcessResource> processResources = await this.client.ListProcessResourcesByDepartment(process);
+            if (processResources.Count > 0)
+            {
+                processMaterials = processResources.Select(
+                    r =>
+                    {
+                        ProcessCheckoutConsumedMaterial processMaterial = new ProcessCheckoutConsumedMaterial()
+                        {
+                            Id = r.Id,
+                            Material = r.Material,
+                            Existing = r.Quantity
+                        };
+
+                        return processMaterial;
+                    }).ToList();
+            }
+            else
+            {
+                processMaterials = new List<ProcessCheckoutConsumedMaterial>();
+            }
+
+            return processMaterials;
         }
 
-        public async Task<List<ProcessCheckoutConsumedMaterial>> GetMaterialsInProcess(MaterialsInProcessResource resource)
+        public async Task<List<MaterialLocationQuantity>> GetQuantitiesPerLocationOfMaterial(string material)
         {
-            throw new NotImplementedException();
-        }
+            // obtain the department (process name) from the material name
+            string department = Utilities.GetDepartmentFromMaterial(material);
+            List<Contracts.WarehouseResource> warehouseResources = await this.client.ListWarehouseResourcesByDepartment(department);
 
-        public async Task<List<MaterialLocationQuantity>> GetQuantitiesPerLocation(QuantitiesPerLocationResource resource)
-        {
-            throw new NotImplementedException();
+            List<MaterialLocationQuantity> materialLocationQuantities = warehouseResources
+                // first filter out the materials we are not looking for
+                .Where(wr => string.Equals(wr.Material, material))
+
+                // then transform to the mlq format
+                .Select(wr => new MaterialLocationQuantity()
+                {
+                    Id = wr.Id,
+                    Material = wr.Material,
+                    ExistingQuantity = wr.Quantity,
+                    Location = wr.Location
+                }).ToList();
+
+            return materialLocationQuantities;
         }
 
         public async Task<bool> InsertAdminItemByType(string item, AdminItemTypes adminItemType)

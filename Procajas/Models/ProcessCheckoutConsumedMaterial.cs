@@ -14,6 +14,8 @@ namespace Procajas.Models
         private int returned;
         private bool isValid = true;
 
+        public string Id { get; set; }
+
         public bool Selected
         {
             get
@@ -135,7 +137,7 @@ namespace Procajas.Models
             {
                 return this.isValid;
             }
-            set
+            private set
             {
                 this.SetProperty(ref this.isValid, value);
             }
