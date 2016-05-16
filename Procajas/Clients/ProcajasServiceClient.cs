@@ -155,6 +155,28 @@ namespace Procajas.Clients
         #endregion
 
         #region Get
+        public async Task<ProcessResource> GetProcessResourceByDepartmentAndId(string department, string id)
+        {
+            string requestUrl = string.Format("process/{0}/{1}", department, id);
+            using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, requestUrl))
+            {
+                HttpResponseMessage response = await this.httpClient.SendAsync(request);
+
+                ProcessResource processResource;
+                if (response.IsSuccessStatusCode)
+                {
+                    processResource = JsonConvert.DeserializeObject<ProcessResource>(await response.Content.ReadAsStringAsync());
+                }
+                else
+                {
+                    this.Log(response);
+                    processResource = null;
+                }
+
+                return processResource;
+            }
+        }
+
         public async Task<WarehouseResource> GetWarehouseResourceByDepartmentAndId(string department, string id)
         {
             string requestUrl = string.Format("warehouse/{0}/{1}", department, id);
@@ -248,26 +270,49 @@ namespace Procajas.Clients
         #endregion
 
         #region Update
-        public async Task<bool> PutWarehouse(IDictionary<string, WarehouseResource> idResourcePairs)
+        public async Task<string> PutProcess(string id, ProcessResource resource)
         {
-            string requestUrl = string.Format("warehouse");
+            string requestUrl = string.Format("process/{0}", id);
             using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Put, requestUrl))
             {
-                request.Content = new StringContent(JsonConvert.SerializeObject(idResourcePairs), Encoding.UTF8, JsonMediaType);
+                request.Content = new StringContent(JsonConvert.SerializeObject(resource), Encoding.UTF8, JsonMediaType);
 
                 HttpResponseMessage response = await this.httpClient.SendAsync(request);
 
                 if (response.IsSuccessStatusCode)
                 {
-                    return true;
+                    IdResource idResource = JsonConvert.DeserializeObject<IdResource>(await response.Content.ReadAsStringAsync());
+                    return idResource.Id;
                 }
                 else
                 {
                     this.Log(response);
-                    return false;
+                    return null;
                 }
             }
         }
+
+        public async Task<string> PutWarehouse(string id, WarehouseResource resource)
+        {
+            string requestUrl = string.Format("warehouse/{0}", id);
+            using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Put, requestUrl))
+            {
+                request.Content = new StringContent(JsonConvert.SerializeObject(resource), Encoding.UTF8, JsonMediaType);
+
+                HttpResponseMessage response = await this.httpClient.SendAsync(request);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    IdResource idResource = JsonConvert.DeserializeObject<IdResource>(await response.Content.ReadAsStringAsync());
+                    return idResource.Id;
+                }
+                else
+                {
+                    this.Log(response);
+                    return null;
+                }
+            }
+        }        
         #endregion
 
         private void Log(HttpResponseMessage response)

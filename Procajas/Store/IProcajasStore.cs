@@ -16,13 +16,13 @@ namespace Procajas.Store
         /// <returns>A list of material, location, quantity items describing the existing numbers of this material.</returns>
         Task<List<MaterialLocationQuantity>> GetQuantitiesPerLocationOfMaterial(string material);
 
-        Task<bool> CheckoutFromWarehouse(List<CheckoutWarehouseResource> resourceList);
+        Task<List<string>> CheckoutFromWarehouse(List<CheckoutWarehouseResource> resourceList);
 
         Task<bool> InsertProcessResource(ProcessResource resource);
 
         Task<List<ProcessCheckoutConsumedMaterial>> GetMaterialsInProcess(string process);
 
-        Task<bool> CheckoutFromProcess(List<CheckoutProcessResource> resourceList);
+        Task<List<string>> CheckoutFromProcess(List<CheckoutProcessResource> resourceList);
 
         Task<bool> InsertFinishedProduct(FinishedProductResource resource);
 

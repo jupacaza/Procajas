@@ -19,6 +19,36 @@ namespace Procajas.Service.Controllers
             }
         }
 
+        // GET process/{department}/{id}
+        public IHttpActionResult Get([FromUri]string department, [FromUri]string id)
+        {
+            // Create a retrieve operation that takes a customer entity.
+            TableOperation retrieveOperation = TableOperation.Retrieve<ProcessEntity>(department, id);
+
+            // Execute the retrieve operation.
+            TableResult retrievedResult = table.Execute(retrieveOperation);
+
+            // Check if it was found
+            if (retrievedResult.Result == null)
+            {
+                return this.NotFound();
+            }
+
+            ProcessEntity entity = (ProcessEntity)retrievedResult.Result;
+            ProcessResource resource = new ProcessResource()
+            {
+                Id = entity.Id,
+                Material = entity.Material,
+                Department = entity.Department,
+                Quantity = entity.Quantity,
+                ProcessCheckinDate = entity.ProcessCheckinDate,
+                Location = entity.Location,
+                Details = entity.Details
+            };
+
+            return this.Ok(resource);
+        }
+
         // GET process/{department}
         public IEnumerable<ProcessResource> Get([FromUri]string department)
         {
@@ -72,6 +102,43 @@ namespace Procajas.Service.Controllers
 
             // Create the response to the client with the id of the row created
             IdResource idResource = new IdResource() { Id = entity.Id };
+
+            return this.Ok(idResource);
+        }
+
+        // PUT process/{id}
+        public IHttpActionResult Put([FromUri]string id, [FromBody]ProcessResource resource)
+        {
+            // Create a retrieve operation that takes a customer entity.
+            TableOperation retrieveOperation = TableOperation.Retrieve<ProcessEntity>(resource.Department, id);
+
+            // Execute the operation.
+            TableResult retrievedResult = table.Execute(retrieveOperation);
+
+            // Assign the result to a CustomerEntity object.
+            ProcessEntity updateEntity = (ProcessEntity)retrievedResult.Result;
+
+            if (updateEntity == null)
+            {
+                // The Warehouse item to be updated could not be found.
+                return this.NotFound();
+            }
+
+            // Change the properties
+            updateEntity.Material = resource.Material;
+            updateEntity.Quantity = resource.Quantity;
+            updateEntity.ProcessCheckinDate = resource.ProcessCheckinDate;
+            updateEntity.Location = resource.Location;
+            updateEntity.Details = resource.Details;
+
+            // Create the Replace TableOperation.
+            TableOperation updateOperation = TableOperation.Replace(updateEntity);
+
+            // Execute the operation.
+            table.Execute(updateOperation);
+
+            // Create the response to the client with the id of the row updated
+            IdResource idResource = new IdResource() { Id = updateEntity.Id };
 
             return this.Ok(idResource);
         }

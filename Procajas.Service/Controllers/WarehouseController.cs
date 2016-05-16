@@ -144,7 +144,8 @@ namespace Procajas.Service.Controllers
             return this.Ok(idResource);
         }
 
-        // PUT warehouse/{id}
+        // PUT warehouse
+        // note, for this to work, all resources have to be in the same store partition
         public IHttpActionResult Put([FromBody]IDictionary<string, WarehouseResource> idsAndResources)
         {
             // Create the batch operation.

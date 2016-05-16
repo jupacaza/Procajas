@@ -11,18 +11,53 @@ namespace Procajas.Store
     {
         private ProcajasServiceClient client = new ProcajasServiceClient();
 
-        public async Task<bool> CheckoutFromProcess(List<CheckoutProcessResource> resourceList)
+        public async Task<List<string>> CheckoutFromProcess(List<CheckoutProcessResource> resourceList)
         {
-            throw new NotImplementedException();
+            bool success = true;
+            Dictionary<string, Contracts.ProcessResource> resourcesToUpdate = new Dictionary<string, Contracts.ProcessResource>();
+
+            // go through all the resources
+            foreach (CheckoutProcessResource resource in resourceList)
+            {
+                // get the specific item from the warehouse
+                Contracts.ProcessResource itemInStore = await this.client.GetProcessResourceByDepartmentAndId(Utilities.GetDepartmentFromMaterial(resource.Material), resource.Id);
+
+                // compare quantity in store and quantity to use
+                if (resource.Quantity > itemInStore.Quantity)
+                {
+                    // if the quantity to use is more than the quantity in store: fail and do not update anything
+                    success = false;
+                    break;
+                }
+
+                // substract quantity to use from quantity in store and prepare the record to update in store
+                Contracts.ProcessResource itemToUpdate = itemInStore.Copy();
+                itemToUpdate.Quantity = itemInStore.Quantity - resource.Quantity;
+                resourcesToUpdate.Add(itemToUpdate.Id, itemToUpdate);
+            }
+
+            List<string> updatedIds = new List<string>();
+            if (success)
+            {
+                // do the update of each resource
+                foreach (KeyValuePair<string, Contracts.ProcessResource> resourceToUpdate in resourcesToUpdate)
+                {
+                    string updatedId = await this.client.PutProcess(resourceToUpdate.Key, resourceToUpdate.Value);
+                    if (!string.IsNullOrEmpty(updatedId))
+                    {
+                        // only add the Ids that succeeded to update
+                        updatedIds.Add(updatedId);
+                    }
+                }
+            }
+
+            return updatedIds;
         }
 
-        public async Task<bool> CheckoutFromWarehouse(List<CheckoutWarehouseResource> resourceList)
+        public async Task<List<string>> CheckoutFromWarehouse(List<CheckoutWarehouseResource> resourceList)
         {
             bool success = true;
             Dictionary<string, Contracts.WarehouseResource> resourcesToUpdate = new Dictionary<string, Contracts.WarehouseResource>();
-
-            // TODO: BATCH UPDATES CAN ONLY BE DONE ON THE SAME PARTITION (in this case department)
-            // THESE UPDATES HAVE TO BE SEGMENTED INTO PARTITIONS
 
             // go through all the resources
             foreach(CheckoutWarehouseResource resource in resourceList)
@@ -44,18 +79,22 @@ namespace Procajas.Store
                 resourcesToUpdate.Add(itemToUpdate.Id, itemToUpdate);
             }
 
+            List<string> updatedIds = new List<string>();
             if (success)
             {
-                // do an atomic batch update of the items
-                bool updateSuccess = await this.client.PutWarehouse(resourcesToUpdate);
-                if (!updateSuccess)
+                // do the update of each resource
+                foreach(KeyValuePair<string, Contracts.WarehouseResource> resourceToUpdate in resourcesToUpdate)
                 {
-                    // if the batch update fails, the checkout should fail
-                    success = false;
+                    string updatedId = await this.client.PutWarehouse(resourceToUpdate.Key, resourceToUpdate.Value);
+                    if (!string.IsNullOrEmpty(updatedId))
+                    {
+                        // only add the Ids that succeeded to update
+                        updatedIds.Add(updatedId);
+                    }
                 }
             }
 
-            return success;
+            return updatedIds;
         }
 
         public async Task<bool> DeleteAdminItemByType(string item, AdminItemTypes adminItemType)

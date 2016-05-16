@@ -33,14 +33,14 @@ namespace Procajas.Store
             "C3"
         };
 
-        public Task<bool> CheckoutFromProcess(List<CheckoutProcessResource> resourceList)
+        public Task<List<string>> CheckoutFromProcess(List<CheckoutProcessResource> resourceList)
         {
-            return Task.FromResult(true);
+            return Task.FromResult(resourceList.Select(r => r.Id).ToList());
         }
 
-        public Task<bool> CheckoutFromWarehouse(List<CheckoutWarehouseResource> resourceList)
+        public Task<List<string>> CheckoutFromWarehouse(List<CheckoutWarehouseResource> resourceList)
         {
-            return Task.FromResult(true);
+            return Task.FromResult(resourceList.Select(r => r.Id).ToList());
         }
         
         public Task<List<string>> GetAdminItemsByType(AdminItemTypes adminItemType, IDictionary<string, bool> filter = null)
