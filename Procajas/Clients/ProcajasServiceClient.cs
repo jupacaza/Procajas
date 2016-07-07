@@ -3,6 +3,7 @@ using Procajas.Contracts;
 using Procajas.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -12,7 +13,7 @@ namespace Procajas.Clients
 {
     public class ProcajasServiceClient
     {
-        private const string BaseAddressString = @"https://procajas.scm.azurewebsites.net/api/";
+        private readonly string BaseAddressString = ConfigurationManager.AppSettings["ida:ProcajasApiEndpoint"];
         private const string JsonMediaType = @"application/json";
 
         public ProcajasServiceClient()
