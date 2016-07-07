@@ -1,6 +1,6 @@
-﻿using Microsoft.Azure;
-using Microsoft.WindowsAzure.Storage;
+﻿using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Table;
+using System.Configuration;
 
 namespace Procajas.Service.Settings
 {
@@ -21,7 +21,7 @@ namespace Procajas.Service.Settings
                 if (serviceSettings == null)
                 {
                     // Get the storage account
-                    CloudStorageAccount newStorageAccount = CloudStorageAccount.Parse(CloudConfigurationManager.GetSetting(Constants.StorageConnectionString));
+                    CloudStorageAccount newStorageAccount = CloudStorageAccount.Parse(ConfigurationManager.AppSettings[Constants.StorageConnectionString]);
 
                     // Create the table client.
                     CloudTableClient newTableClient = newStorageAccount.CreateCloudTableClient();
