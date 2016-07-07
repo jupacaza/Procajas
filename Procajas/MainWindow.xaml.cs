@@ -26,7 +26,7 @@ namespace Procajas
         private static string tenant = ConfigurationManager.AppSettings["ida:Tenant"];
         private static string clientId = ConfigurationManager.AppSettings["ida:ClientId"];
         Uri redirectUri = new Uri(ConfigurationManager.AppSettings["ida:RedirectUri"]);
-        private static string authority = String.Format(CultureInfo.InvariantCulture, aadInstance, tenant);
+        private static string authority = string.Format(CultureInfo.InvariantCulture, aadInstance, tenant);
 
         private static string procajasResourceId = ConfigurationManager.AppSettings["ida:ProcajasResourceId"];
         private static string procajasApiEndpoint = ConfigurationManager.AppSettings["ida:ProcajasApiEndpoint"];
