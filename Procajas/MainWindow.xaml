@@ -11,8 +11,17 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Margin="5" FontSize="32" TextWrapping="Wrap">Procajas</TextBlock>
-
+        <StackPanel Orientation="Vertical" Grid.Row="0" Margin="5">
+            <TextBlock FontSize="32" TextWrapping="Wrap">Procajas</TextBlock>
+            <Button HorizontalAlignment="Right" x:Name="SignInButton"
+                    Content="{x:Static p:Resources.signInText}"
+                    Margin="0" Click="SignIn" Width="80" Height="30"/>
+            <Button HorizontalAlignment="Right" x:Name="SignOutButton"
+                    Content="{x:Static p:Resources.signOutText}"
+                    Margin="0" Click="SignOut" Width="80" Height="30" Visibility="Hidden"/>
+            <Label x:Name="UserNameLabel" />
+        </StackPanel>
+        
         <TabControl AutomationProperties.AutomationId="InteractivityTabControl" Grid.Row="1">
             <TabItem Header="{x:Static p:Resources.inputToWarehouseText}">
                 <views:WarehouseIncomingView />

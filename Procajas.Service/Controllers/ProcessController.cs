@@ -6,6 +6,7 @@ using System.Web.Http;
 
 namespace Procajas.Service.Controllers
 {
+    [Authorize]
     public class ProcessController : BaseController
     {
         private CloudTable table;

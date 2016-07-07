@@ -8,7 +8,7 @@ using System.Web.Http;
 
 namespace Procajas.Service.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class AdminItemController : BaseController
     {
         private CloudTable table;

@@ -240,4 +240,10 @@
   <data name="administratorText" xml:space="preserve">
     <value>Administrador</value>
   </data>
+  <data name="signInText" xml:space="preserve">
+    <value>Iniciar sesión</value>
+  </data>
+  <data name="signOutText" xml:space="preserve">
+    <value>Cerrar sesión</value>
+  </data>
 </root>

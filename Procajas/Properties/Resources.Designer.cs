@@ -394,6 +394,24 @@ namespace Procajas.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Iniciar sesión.
+        /// </summary>
+        public static string signInText {
+            get {
+                return ResourceManager.GetString("signInText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cerrar sesión.
+        /// </summary>
+        public static string signOutText {
+            get {
+                return ResourceManager.GetString("signOutText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A usar.
         /// </summary>
         public static string toUseText {
