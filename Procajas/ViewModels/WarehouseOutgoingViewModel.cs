@@ -21,7 +21,7 @@ namespace Procajas.ViewModels
 
         public WarehouseOutgoingViewModel()
         {
-            this.store = StoreFactory.Get(StoreTypes.Test);
+            this.store = StoreFactory.Get(StoreTypes.ProcajasService);
             
             this.AcceptButtonCommand = new DelegateCommand(this.DoWarehouseCheckout);
         }

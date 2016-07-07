@@ -5,6 +5,7 @@ using Procajas.Service.Models.TableEntities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Tracing;
 
 namespace Procajas.Service.Controllers
 {
@@ -25,6 +26,8 @@ namespace Procajas.Service.Controllers
         // GET adminItem/[material|process|location]
         public IEnumerable<AdminItemResource> Get([FromUri]string type)
         {
+            Configuration.Services.GetTraceWriter().Info(this.Request, "AdminItemController", "Get admin items by type.");
+
             // Construct the query operation for all customer entities where PartitionKey="Smith".
             TableQuery<AdminItemEntity> query = new TableQuery<AdminItemEntity>().Where(
                 TableQuery.GenerateFilterCondition(Constants.PartitionKey, QueryComparisons.Equal, type));
@@ -34,13 +37,15 @@ namespace Procajas.Service.Controllers
             {
                 adminItemsByType.Add(new AdminItemResource() { Name = entity.Name, Type = entity.Type });
             }
-
+            
             return adminItemsByType;
         }
 
         // POST adminItem
         public IHttpActionResult Post([FromBody]AdminItemResource resource)
         {
+            Configuration.Services.GetTraceWriter().Info(this.Request, "AdminItemController", "Post admin item.");
+
             AdminItemEntity entity = new AdminItemEntity(resource.Name, resource.Type);
 
             // Create the table if it doesn't exist.
@@ -58,6 +63,8 @@ namespace Procajas.Service.Controllers
         // DELETE adminItem/{type}/{name}
         public IHttpActionResult Delete([FromUri]string type, [FromUri]string name)
         {
+            Configuration.Services.GetTraceWriter().Info(this.Request, "AdminItemController", "Delete admin item.");
+
             // Create a retrieve operation that expects a customer entity.
             TableOperation retrieveOperation = TableOperation.Retrieve<AdminItemEntity>(type, name);
 

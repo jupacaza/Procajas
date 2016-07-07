@@ -22,7 +22,7 @@ namespace Procajas.ViewModels
         
         public ProcessCheckinViewModel()
         {
-            this.store = StoreFactory.Get(StoreTypes.Test);
+            this.store = StoreFactory.Get(StoreTypes.ProcajasService);
             this.AcceptButtonCommand = new DelegateCommand(this.DoProcessCheckin);
             this.LoadProcessList();
         }

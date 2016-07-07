@@ -25,7 +25,7 @@ namespace Procajas.ViewModels
 
         public WarehouseIncomingViewModel()
         {
-            this.store = StoreFactory.Get(StoreTypes.Test);
+            this.store = StoreFactory.Get(StoreTypes.ProcajasService);
             this.AcceptButtonCommand = new DelegateCommand(this.DoWarehouseCheckin);
             this.LoadMaterialList();
             this.LoadLocationList();
