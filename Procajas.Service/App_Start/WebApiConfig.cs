@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Tracing;
 
 namespace Procajas.Service
 {
@@ -10,6 +11,9 @@ namespace Procajas.Service
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
+            SystemDiagnosticsTraceWriter traceWriter = config.EnableSystemDiagnosticsTracing();
+            traceWriter.IsVerbose = true;
+            traceWriter.MinimumLevel = TraceLevel.Debug;
 
             // Web API routes
             config.MapHttpAttributeRoutes();
