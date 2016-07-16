@@ -13,11 +13,18 @@ namespace Procajas.Service
     {
         protected void Application_Start()
         {
-            AreaRegistration.RegisterAllAreas();
-            GlobalConfiguration.Configure(WebApiConfig.Register);
-            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
-            RouteConfig.RegisterRoutes(RouteTable.Routes);
-            BundleConfig.RegisterBundles(BundleTable.Bundles);
+            try
+            {
+                AreaRegistration.RegisterAllAreas();
+                GlobalConfiguration.Configure(WebApiConfig.Register);
+                FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+                RouteConfig.RegisterRoutes(RouteTable.Routes);
+                BundleConfig.RegisterBundles(BundleTable.Bundles);
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine("Exception {0}", e.ToString());
+            }
         }
     }
 }
